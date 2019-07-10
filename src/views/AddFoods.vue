@@ -29,17 +29,11 @@
 						<img class="foods__image" :src="food.image_url" alt="">
 						<span class="foods__name">{{ food.product_name }}</span>
 						<div class="u-mr u-ml">
-							<button class="search__results-btn-checked js-checked-btn" :class="{'active': favoriteFoods.some(el => el.id === food.id)}">
+							<button class="search__results-btn-checked js-checked-btn" :class="{'active': getFavoriteFoods.some(el => el.id === food.id)}">
 								<i class="far fa-check-circle"></i>
 							</button>
 						</div>
 					</div>
-				</div>
-				<div class="pagination" v-if="searchResults">
-					<input type="number" value="0" />
-					<span>/</span>
-					<span class="pagination__last">{{Math.ceil(searchResults.count / parseInt(searchResults.page_size))}}</span>
-					<button>Go</button>
 				</div>
 			</div>
 		</div>
@@ -85,29 +79,30 @@ export default {
 				})
 		},
 		selectedFavoriteFoods: function(event, index) {
-			this.favoriteFoods = JSON.parse(JSON.stringify(this.getFavoriteFoods));
-			const checkButton = event.currentTarget.querySelector('.js-checked-btn');
-			if (!checkButton.classList.contains('active')) {
-				this.isFoodsSelected = true;
-			}
-			const selectedFood = this.searchResults.products[index];
-			const indexOfSelectedFoodInFavorite = this.favoriteFoods.indexOf(selectedFood);
-			// If the product doesn't exist we push in it, else we remove it.
-			if (indexOfSelectedFoodInFavorite === -1) {
-				this.favoriteFoods.push(selectedFood);
+			let selectedProduct = this.searchResults.products[index];
+			// Add or remove the selected product from favorite list.
+			const isFoodSelected = event.currentTarget.querySelector('.js-checked-btn').classList.contains('active');
+			if (isFoodSelected) {
+				this.favoriteFoods = this.favoriteFoods.filter(el => el.id !== selectedProduct.id);
 			} else {
-				this.favoriteFoods.splice(indexOfSelectedFoodInFavorite, 1);
+				this.favoriteFoods.push(selectedProduct);
 			}
 			event.currentTarget.querySelector('.js-checked-btn').classList.toggle('active');
+
+			// Enable the done button if needed.
+			const isFavoriteFoodsDifferentFromStore = this.getFavoriteFoods.length !== this.favoriteFoods.length;
+			isFavoriteFoodsDifferentFromStore ? this.isFoodsSelected = true : this.isFoodsSelected = false;
 		},
 		addToFavoriteFoods: function() {
 			if (!this.isFoodsSelected) return;
 			// Store the selected favorite foods.
 			this.$store.commit('updateMyFoods', this.favoriteFoods);
-			// Then reset the datas.
+			// Then reset the datas
 			this.searchResults = null;
 			this.isLayerEnabled = false;
 			this.isFoodsSelected = false;
+			// And return to the foods view.
+			this.$router.push({ path: '/foods' });
 		}
 	},
 	computed: {
@@ -161,7 +156,7 @@ export default {
 	}
 
 	.search__results {
-		padding: 10px 20px 0;
+		padding: 10px 20px 50px;
 	}
 
 
