@@ -1,6 +1,5 @@
 <template>
 	<div>
-		<button class="add-button" @click="showLayer">+</button>
 		<div class="addFoods__layer" :class="{ 'active' : isLayerEnabled  }">
 			<div class="search">
 				<div class="button-container space-x">
@@ -129,13 +128,7 @@ export default {
 		right: 0;
 		top: 0;
 		bottom: 0;
-		transform: translateX(-100%);
-		z-index: 200;
-		transition: transform ease-out .2s;
 		overflow: auto;
-		&.active {
-			transform: translateX(0);
-		}
 	}
 	.addFoods__back-button {
 		border: none;

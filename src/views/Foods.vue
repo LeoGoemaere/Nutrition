@@ -2,7 +2,10 @@
 	<div class="foods">
 		<div class="foods__heading space-x">
 			<h1>My Foods</h1>
-			<AddFoods />
+			<router-link to="/foods/add" class="add-button">+</router-link>
+			<transition name="sliding-on-side" mode="ease-out">
+				<router-view></router-view>
+			</transition>
 		</div>
 		<div class="foods__row" 
 			 v-for="food in getFavoriteFoods"
@@ -17,22 +20,9 @@
 <script>
 import { mapGetters } from 'vuex';
 
-import AddFoods from '@/components/AddFoods.vue'
-
 export default {
 	name: 'Foods',
-	components: {
-		AddFoods
-	},
-	data: function() {
-		return {
-			favoriteFoods: null
-		}
-	},
-	mounted() {
-		// Create a deep copy
-		// this.favoriteFoods = JSON.parse(JSON.stringify(this.getFavoriteFoods));
-	},
+
 	computed: {
 		...mapGetters([
 			'getFavoriteFoods',

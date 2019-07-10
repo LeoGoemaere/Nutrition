@@ -13,7 +13,7 @@ export default new Router({
 			component: Profile
 		},
 		{
-			path: '/Meals',
+			path: '/meals',
 			name: 'meals',
 			// route level code-splitting
 			// this generates a separate chunk (about.[hash].js) for this route
@@ -21,12 +21,19 @@ export default new Router({
 			component: () => import(/* webpackChunkName: "about" */ './views/Meals.vue')
 		},
 		{
-			path: '/Foods',
+			path: '/foods',
 			name: 'foods',
 			// route level code-splitting
 			// this generates a separate chunk (about.[hash].js) for this route
 			// which is lazy-loaded when the route is visited.
-			component: () => import(/* webpackChunkName: "about" */ './views/Foods.vue')
+			component: () => import(/* webpackChunkName: "about" */ './views/Foods.vue'),
+			children: [
+				{
+					path: 'Add',
+					name: 'add',
+					component: () => import(/* webpackChunkName: "about" */ './views/AddFoods.vue')
+				}
+			]
 		}
 	]
 })

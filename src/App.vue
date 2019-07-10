@@ -22,6 +22,32 @@
 		font-family: 'Roboto';
 	}
 
+	// Animations
+	.sliding-on-side-enter-active {
+		animation: sliding-side .3s;
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+	}
+	.sliding-on-side-leave-active {
+		animation: sliding-side .3s reverse;
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+	}
+	@keyframes sliding-side {
+		0% {
+			transform: translateX(-100%);
+		}
+		100% {
+			transform: translateX(0);
+		}
+	}
+
 	.space-x {
 		padding-left: 10px;
 		padding-right: 10px;
@@ -76,6 +102,8 @@
 		background-color: #3ae374;
 		border-radius: 50%;
 		color: #fff;
+		text-decoration: none;
+		text-align: center;
 	}
 
 	.button {
