@@ -1,9 +1,9 @@
 <template>
 	<div>
-		<div class="addFoods__layer" :class="{ 'active' : isLayerEnabled  }">
+		<div class="addFoods__layer">
 			<div class="search">
 				<div class="button-container space-x">
-					<button class="addFoods__back-button" @click="hideLayer"><i class="fas fa-chevron-left"></i></button>
+					<button class="addFoods__back-button" @click="backToFavorite"><i class="fas fa-chevron-left"></i></button>
 					<button @click="addToFavoriteFoods" class="addFoods__done" :class="{ 'disabled': !isFoodsSelected }">Done</button>
 				</div>
 				<div class="search__content">
@@ -51,7 +51,6 @@ export default {
 		return {
 			userRequest: null,
 			searchResults: null,
-			isLayerEnabled: false,
 			isFoodsSelected: false,
 			favoriteFoods: null
 		}
@@ -60,12 +59,8 @@ export default {
 		this.favoriteFoods = JSON.parse(JSON.stringify(this.getFavoriteFoods));
 	},
 	methods: {
-		showLayer: function() {
-			this.isLayerEnabled = true;
-		},
-		hideLayer: function() {
-			this.favoriteFoods.splice(0);
-			this.isLayerEnabled = false;
+		backToFavorite: function() {
+			this.$router.push({ path: '/foods' });
 		},
 		searchProducts(e) {
 			this.userRequest = e.target.value;
@@ -90,6 +85,7 @@ export default {
 			event.currentTarget.querySelector('.js-checked-btn').classList.toggle('active');
 
 			// Enable the done button if needed.
+			// TODO : Error if length is identical but the object changed.
 			const isFavoriteFoodsDifferentFromStore = this.getFavoriteFoods.length !== this.favoriteFoods.length;
 			isFavoriteFoodsDifferentFromStore ? this.isFoodsSelected = true : this.isFoodsSelected = false;
 		},
@@ -99,7 +95,6 @@ export default {
 			this.$store.commit('updateMyFoods', this.favoriteFoods);
 			// Then reset the datas
 			this.searchResults = null;
-			this.isLayerEnabled = false;
 			this.isFoodsSelected = false;
 			// And return to the foods view.
 			this.$router.push({ path: '/foods' });
@@ -124,6 +119,7 @@ export default {
 		top: 0;
 		bottom: 0;
 		overflow: auto;
+		z-index: 1;
 	}
 	.addFoods__back-button {
 		border: none;
@@ -140,75 +136,5 @@ export default {
 		&.disabled {
 			opacity: .5;
 		}
-	}
-	.search {
-		position: relative;	
-	}
-	.search__content {
-		padding: 10px 30px 10px 10px;
-		position: sticky;
-		top: 0;
-		background-color: #535c68;
-	}
-
-	.search__inner {
-		position: relative;
-	}
-
-	.search__results {
-		padding: 10px 20px 50px;
-	}
-
-
-	.search__results-btn-checked {
-		border: none;
-		background: none;
-		font-size: 18px;
-		font-weight: 700;
-		color: #3ae374;
-		opacity: 0;
-		transform: scale(.4);
-		transition: opacity .2s ease-out, transform .2s ease-out;
-		&.active { 
-			opacity: 1;
-			transform: scale(1);
-			transition: opacity .2s ease-out, transform .2s ease-out;
-		}
-	}
-
-	.search__input {
-		width: 100%;
-		border-radius: 3px;
-		box-sizing: border-box;
-		color: #7d7d7d;
-		display: block;
-		margin: auto;
-		border: none;
-		padding: 15px 20px;
-		&:focus {
-			outline: none;
-		}
-		&::placeholder {
-			color: #7d7d7d;
-		}
-	}
-
-	.search__button {
-		border-radius: 50%;
-		border: none;
-		cursor: pointer;
-		background-color: #3ae374;
-		color: #fff;
-		width: 46px;
-		height: 46px;
-		position: absolute;
-		right: 0;
-		top: 0;
-		bottom: 0;
-		transform: translateX(50%);
-		margin: auto;
-		font-family: 'Roboto';
-		font-weight: 300;
-		font-size: 16px;
 	}
 </style>

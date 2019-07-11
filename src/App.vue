@@ -7,7 +7,7 @@
 			<router-link class="nav__link" to="/meals">
 				<i class="fas fa-utensils"></i>
 			</router-link>
-			<router-link class="nav__link" to="/">
+			<router-link class="nav__link" to="/" exact>
 				<i class="fas fa-user"></i>
 			</router-link>
 		</div>
@@ -23,22 +23,18 @@
 	}
 
 	// Animations
-	.sliding-on-side-enter-active {
-		animation: sliding-side .3s;
-		position: fixed;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-	}
+	.sliding-on-side-enter-active,
 	.sliding-on-side-leave-active {
-		animation: sliding-side .3s reverse;
 		position: fixed;
 		top: 0;
 		left: 0;
 		right: 0;
 		bottom: 0;
+		z-index: 1;
 	}
+	.sliding-on-side-enter-active { animation: sliding-side .3s; }
+	.sliding-on-side-leave-active { animation: sliding-side .3s reverse; }
+	
 	@keyframes sliding-side {
 		0% {
 			transform: translateX(-100%);
@@ -80,7 +76,7 @@
 
 	.nav__link {
 		color: #fff;
-		&.router-link-exact-active {
+		&.router-link-active {
 			color: #3ae374;
 		}
 	}
@@ -123,6 +119,77 @@
 		&:focus {
 			outline: none;
 		}
+	}
+
+	.search {
+		position: relative;	
+	}
+	.search__content {
+		padding: 10px 30px 10px 10px;
+		position: sticky;
+		top: 0;
+		background-color: #535c68;
+	}
+
+	.search__inner {
+		position: relative;
+	}
+
+	.search__results {
+		padding: 10px 20px 50px;
+	}
+
+
+	.search__results-btn-checked {
+		border: none;
+		background: none;
+		font-size: 18px;
+		font-weight: 700;
+		color: #3ae374;
+		opacity: 0;
+		transform: scale(.4);
+		transition: opacity .2s ease-out, transform .2s ease-out;
+		&.active { 
+			opacity: 1;
+			transform: scale(1);
+			transition: opacity .2s ease-out, transform .2s ease-out;
+		}
+	}
+
+	.search__input {
+		width: 100%;
+		border-radius: 3px;
+		box-sizing: border-box;
+		color: #7d7d7d;
+		display: block;
+		margin: auto;
+		border: none;
+		padding: 15px 20px;
+		&:focus {
+			outline: none;
+		}
+		&::placeholder {
+			color: #7d7d7d;
+		}
+	}
+
+	.search__button {
+		border-radius: 50%;
+		border: none;
+		cursor: pointer;
+		background-color: #3ae374;
+		color: #fff;
+		width: 46px;
+		height: 46px;
+		position: absolute;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		transform: translateX(50%);
+		margin: auto;
+		font-family: 'Roboto';
+		font-weight: 300;
+		font-size: 16px;
 	}
 
 </style>

@@ -7,22 +7,17 @@
 				<router-view></router-view>
 			</transition>
 		</div>
-		<div class="foods__row" 
-			 v-for="food in getFavoriteFoods"
-			 :key="food.key"
-		>
-			<img class="foods__image" :src="food.image_url" alt="">
-			<div class="foods__name">{{food.product_name}}</div>
-		</div>
+		<FavoriteFoodsList />
 	</div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
+import FavoriteFoodsList from '@/components/FavoriteFoodsList';
 
 export default {
 	name: 'Foods',
-
+	components: { FavoriteFoodsList },
 	computed: {
 		...mapGetters([
 			'getFavoriteFoods',
