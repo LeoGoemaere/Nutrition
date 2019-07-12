@@ -34,6 +34,13 @@
 	}
 	.sliding-on-side-enter-active { animation: sliding-side .3s; }
 	.sliding-on-side-leave-active { animation: sliding-side .3s reverse; }
+
+	.v-enter { opacity: 0; transform: scale(.6); }
+	.v-enter-active { transition: opacity .1s, transform .1s; }
+	.v-enter-to { opacity: 1; transform: scale(1) }
+	.v-leave { opacity: 1; transform: scale(1) }
+	.v-leave-active { transition: opacity .1s, transform .1s; }
+	.v-leave-to { opacity: 0; transform: scale(.6)  }
 	
 	@keyframes sliding-side {
 		0% {
@@ -190,11 +197,14 @@
 		font-family: 'Roboto';
 		font-weight: 300;
 		font-size: 16px;
+		transition: background-color .2s ease-out;
 		&.search__button--inactive {
 			background-color: #535c68;
+			transition: background-color .2s ease-out;
 		}
 		&.search__button--red {
 			background-color: #b9b9b9;
+			transition: background-color .2s ease-out;
 		}
 	}
 

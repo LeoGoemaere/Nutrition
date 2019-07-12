@@ -3,10 +3,12 @@
 		<div  v-if="getFavoriteFoods.length > 0" class="search__content u-mb">
 			<div class="search__inner">
 				<input class="search__input" v-model="filterRequest" type="text" placeholder="Or search for food..">
-				<button class="search__button" :class="{ 'search__button--inactive': !filterRequest, 'search__button--red': filterRequest }">
-					<i class="fas fa-search" v-if="!filterRequest"></i>
-					<i class="fas fa-times" v-if="filterRequest"></i>
-				</button>
+					<button class="search__button" :class="{ 'search__button--inactive': !filterRequest, 'search__button--red': filterRequest }">
+						<transition mode="out-in">
+							<i class="fas fa-search" v-if="!filterRequest" key="search"></i>
+							<i class="fas fa-times" v-if="filterRequest" key="times"></i>
+						</transition>
+					</button>
 			</div>
 		</div>
 		<div class="foods__row" 
