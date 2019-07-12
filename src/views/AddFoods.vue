@@ -85,9 +85,9 @@ export default {
 			event.currentTarget.querySelector('.js-checked-btn').classList.toggle('active');
 
 			// Enable the done button if needed.
-			// TODO : Error if length is identical but the object changed.
-			const isFavoriteFoodsDifferentFromStore = this.getFavoriteFoods.length !== this.favoriteFoods.length;
-			isFavoriteFoodsDifferentFromStore ? this.isFoodsSelected = true : this.isFoodsSelected = false;
+			const isFavoriteFoodsSuperiorFromStore = this.favoriteFoods.length > this.getFavoriteFoods.length;
+			const isFavoriteFoodsContainsEveryItemFromStore = this.getFavoriteFoods.map(food => food.id).every(id => this.favoriteFoods.map(food => food.id).includes(id));
+			!isFavoriteFoodsContainsEveryItemFromStore || isFavoriteFoodsSuperiorFromStore ? this.isFoodsSelected = true : this.isFoodsSelected = false;
 		},
 		addToFavoriteFoods: function() {
 			if (!this.isFoodsSelected) return;
