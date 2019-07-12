@@ -12,7 +12,7 @@
 			</div>
 		</div>
 		<div class="foods__row" 
-			 v-for="food in getFavoriteFoods"
+			 v-for="food in filterFavoriteFoods"
 			 :key="food.key"
 		>
 			<img class="foods__image" :src="food.image_url" alt="">
@@ -33,7 +33,20 @@ export default {
 			filterRequest: null
 		}
 	},
+	methods: {
+		convertToLowerCase: function(string) {
+			return string.toLowerCase();
+		},
+		convertToDiacriticInsensitive: function(string) {
+			// Remove accents.
+			return string.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+		}
+	},
 	computed: {
+		filterFavoriteFoods: function () {
+			if (!this.filterRequest) return this.getFavoriteFoods;
+			return this.getFavoriteFoods.filter(food => this.convertToDiacriticInsensitive(this.convertToLowerCase(food.product_name)).includes(this.convertToDiacriticInsensitive(this.convertToLowerCase(this.filterRequest))));
+		},
 		...mapGetters([
 			'getFavoriteFoods',
 		])
