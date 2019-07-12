@@ -190,6 +190,12 @@
 		font-family: 'Roboto';
 		font-weight: 300;
 		font-size: 16px;
+		&.search__button--inactive {
+			background-color: #535c68;
+		}
+		&.search__button--red {
+			background-color: #b9b9b9;
+		}
 	}
 
 </style>
