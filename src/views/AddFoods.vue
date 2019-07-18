@@ -82,6 +82,7 @@ export default {
 			} else {
 				this.favoriteFoods.push(selectedProduct);
 			}
+			// TODO: Reset the active class when user make an other search request without confirm with the done button.
 			event.currentTarget.querySelector('.js-checked-btn').classList.toggle('active');
 
 			// Enable the done button if needed.

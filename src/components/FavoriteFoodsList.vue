@@ -3,7 +3,7 @@
 		<div  v-if="getFavoriteFoods.length > 0" class="search__content u-mb">
 			<div class="search__inner">
 				<input class="search__input" v-model="filterRequest" type="text" placeholder="Or search for food..">
-					<button class="search__button" :class="{ 'search__button--inactive': !filterRequest, 'search__button--red': filterRequest }">
+					<button class="search__button" @click="filterRequest ? clearFilterRequest() : null" :class="{ 'search__button--inactive': !filterRequest, 'search__button--red': filterRequest }">
 						<transition mode="out-in">
 							<i class="fas fa-search" v-if="!filterRequest" key="search"></i>
 							<i class="fas fa-times" v-if="filterRequest" key="times"></i>
@@ -40,6 +40,9 @@ export default {
 		convertToDiacriticInsensitive: function(string) {
 			// Remove accents.
 			return string.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+		},
+		clearFilterRequest() {
+			this.filterRequest = null;
 		}
 	},
 	computed: {
