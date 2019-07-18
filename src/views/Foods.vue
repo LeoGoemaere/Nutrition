@@ -1,6 +1,6 @@
 <template>
 	<div class="foods">
-		<div class="foods__heading space-x">
+		<div class="heading space-x">
 			<h1>My Foods</h1>
 			<router-link to="/foods/add" class="add-button">+</router-link>
 			<transition name="sliding-on-side">
@@ -28,14 +28,6 @@ export default {
 
 <style lang="scss">
 
-	.foods {
-		padding-bottom: 50px;
-	}
-	.foods__heading {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-	}
 	.foods__row {
 		display: flex;
 		align-items: center;

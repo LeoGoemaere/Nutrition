@@ -68,6 +68,16 @@
 		&mb { margin-bottom: 12px; }
 	}
 
+	#app {
+		padding-bottom: 50px;
+	}
+
+	.heading {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+
 	.nav {
 		position: fixed;
 		bottom: 0;
