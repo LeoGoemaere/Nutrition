@@ -32,8 +32,14 @@ export default new Router({
 					path: 'Add',
 					name: 'add',
 					component: () => import(/* webpackChunkName: "about" */ './views/AddFoods.vue')
-				}
+				},
 			]
+		},
+		{
+			path: '/foods/details/:id',
+			name: 'details',
+			props: true,
+			component: () => import(/* webpackChunkName: "about" */ './views/FoodDetails.vue')
 		}
 	]
 })

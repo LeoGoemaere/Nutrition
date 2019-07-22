@@ -3,7 +3,7 @@
 		<div class="addFoods__layer">
 			<div class="search">
 				<div class="button-container space-x">
-					<button class="addFoods__back-button" @click="backToFavorite"><i class="fas fa-chevron-left"></i></button>
+					<button class="back-button" @click="backToFavorite"><i class="fas fa-chevron-left"></i></button>
 					<button @click="addToFavoriteFoods" class="addFoods__done" :class="{ 'disabled': !isFoodsSelected }">Done</button>
 				</div>
 				<div class="search__content">
@@ -28,6 +28,11 @@
 					>
 						<img class="foods__image" :src="food.image_url" alt="">
 						<span class="foods__name">{{ food.product_name }}</span>
+						<div class="u-mr u-ml">
+							<router-link :to="{ name: 'details', params: { id: food.id } }" class="search__results-btn-detail">
+								<i class="far fa-question-circle"></i>
+							</router-link>
+						</div>
 						<div class="u-mr u-ml">
 							<button class="search__results-btn-checked js-checked-btn" :class="{'active': getFavoriteFoods.some(el => el.id === food.id)}">
 								<i class="far fa-check-circle"></i>
@@ -65,6 +70,10 @@ export default {
 		searchProducts(e) {
 			this.userRequest = e.target.value;
 		},
+		test: function(e) {
+			debugger;
+			e.preventDefault();
+		},
 		searching: function() {
 			const request = new Request(`https://world.openfoodfacts.org/cgi/search.pl?search_terms=${this.userRequest}&search_simple=1&action=process&json=1`);
 			fetch(request)
@@ -72,6 +81,7 @@ export default {
 				.then(data => {
 					this.searchResults = data;
 				})
+
 		},
 		selectedFavoriteFoods: function(event, index) {
 			let selectedProduct = this.searchResults.products[index];
@@ -122,7 +132,7 @@ export default {
 		overflow: auto;
 		z-index: 1;
 	}
-	.addFoods__back-button {
+	.back-button {
 		border: none;
 		background: none;
 		color: #3ae374;

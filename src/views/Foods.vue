@@ -3,7 +3,7 @@
 		<div class="heading space-x">
 			<h1>My Foods</h1>
 			<router-link to="/foods/add" class="add-button">+</router-link>
-			<transition name="sliding-on-side">
+			<transition name="sliding-on-top">
 				<router-view></router-view>
 			</transition>
 		</div>
