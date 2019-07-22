@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div class="button-container space-x">
-			<button class="back-button" @click="backToAddFoods"><i class="fas fa-chevron-left"></i></button>
+			<button class="back-button" @click="backToPreviousView"><i class="fas fa-chevron-left"></i></button>
 		</div>
 		<div class="heading space-x">
 			<h1 v-if="this.product">{{this.product.product_name}}</h1>
@@ -14,7 +14,7 @@
 export default {
 	name: 'meals',
 	props: {
-		id: String
+		view: String
 	},
 	components: {
 	},
@@ -35,8 +35,8 @@ export default {
 			})
 	},
 	methods: {
-		backToAddFoods: function() {
-			this.$router.push({ name: 'add' });
+		backToPreviousView: function() {
+			this.$router.push({ name: this.view });
 		}
 	}
 }
