@@ -80,6 +80,8 @@
 		&ml { margin-left: 12px; }
 		&mr { margin-right: 12px; }
 		&mb { margin-bottom: 12px; }
+
+		&ta-r { text-align: right; }
 	}
 
 	#app {
@@ -139,6 +141,19 @@
 		color: #fff;
 		text-decoration: none;
 		text-align: center;
+	}
+
+	.close-button {
+		color: #fff;
+		border: none;
+		position: fixed;
+		top: 20px;
+		right: 20px;
+		width: 30px;
+		height: 30px;
+		font-size: 16px;
+		background-color: #535c68;
+		border-radius: 50%;
 	}
 
 	.button {
