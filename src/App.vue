@@ -19,8 +19,13 @@
 	* {
 		margin: 0;
 		padding: 0;
-		font-family: 'Roboto';
+		font-family: 'Roboto', sans-serif;
 	}
+
+	$calorie-color: #f4c368;
+	$protein-color: #77e18a;
+	$carb-color: #ea87e1;
+	$fat-color: #8ec6f8;
 
 	// Animations
 	.sliding-on-top-enter-active,
@@ -46,6 +51,13 @@
 	.v-leave { opacity: 1; transform: scale(1) }
 	.v-leave-active { transition: opacity .1s, transform .1s; }
 	.v-leave-to { opacity: 0; transform: scale(.6);  }
+
+	.fade-out-in-enter { opacity: 0; }
+	.fade-out-in-enter-active { transition: opacity .2s; }
+	.fade-out-in-enter-to { opacity: 1; }
+	.fade-out-in-leave { opacity: 1; }
+	.fade-out-in-leave-active { transition: opacity .2s; }
+	.fade-out-in-leave-to { opacity: 0; }
 
 	@keyframes sliding-side {
 		0% {
@@ -114,6 +126,11 @@
 		}
 	}
 
+	.icon--cal { color: $calorie-color; }
+	.icon-prot { color: $protein-color; }
+	.icon-carb { color: $carb-color; }
+	.icon-fat { color: $fat-color; }
+
 	.button-container {
 		display: flex;
 		justify-content: space-between;
@@ -165,12 +182,7 @@
 		background-color: #3ae374;
 		color: #fff;
 		font-size: 17px;
-		transform: scale(1);
-		transition: transform .1s  ease-out;
-		&:active {
-			transform: scale(0.99);
-			transition: transform .1s  ease-out;
-		}
+		transition: background-color .4s ease-out;
 		&:focus {
 			outline: none;
 		}
@@ -178,6 +190,7 @@
 
 	.button--alert {
 		background-color: #ec5555;
+		transition: background-color .4s ease-out;
 	}
 
 	.search {

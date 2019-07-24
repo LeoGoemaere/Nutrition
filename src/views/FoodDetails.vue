@@ -12,41 +12,45 @@
 				<p class="space-x nutriments__dose">Informations for 100g</p>
 				<div class="u-mt space-x nutriments__row">
 					<p class="nutriments__label">
-						<i class="fas fa-fire-alt u-mr"></i>
+						<i class="fas fa-fire-alt icon--cal u-mr"></i>
 						<span>Calories</span>
 					</p>
 					<span class="nutriments__datas">{{product.nutriments.energy_100g}} kj / {{roundValue(convertKilojouleToKilocalorie(product.nutriments.energy_100g))}} kcal</span>
 				</div>
 				<div class="space-x nutriments__row">
 					<p class="nutriments__label">
-						<i class="fas fa-drumstick-bite u-mr"></i>
+						<i class="fas fa-drumstick-bite icon-prot u-mr"></i>
 						<span>Proteïnes</span>
 					</p>
 					<span class="nutriment__datas">{{product.nutriments.proteins_100g}}g</span>
 				</div>
 				<div class="space-x nutriments__row">
 					<p class="nutriments__label">
-						<i class="fas fa-bread-slice u-mr"></i>
+						<i class="fas fa-bread-slice icon-carb u-mr"></i>
 						<span>Glucides</span>
 					</p>
 					<span class="nutriments__datas">{{product.nutriments.carbohydrates_100g}}g</span>
 				</div>
 				<div class="space-x nutriments__row">
 					<p class="nutriments__label">
-						<i class="fas fa-fish u-mr"></i>
+						<i class="fas fa-fish icon-fat u-mr"></i>
 						<span>Lipides</span>
 					</p>
 					<span class="nutriments__datas">{{product.nutriments.fat_100g}}g</span>
 				</div>
 			</div>
 			<div class="space-x">
-				<button @click="removeFromFavoriteFoods" v-if="getFavoriteFoods.some(el => el.id === product.id)" class="button button--alert">
-					<i class="far fa-trash-alt u-mr"></i>
-					<span>Remove from favorite foods</span>
-				</button>
-				<button @click="addToFavoritesFoods" v-else class="button">
-					<i class="fas fa-plus u-mr"></i>
-					<span>Add to favorite foods</span>
+				<button @click="getFavoriteFoods.some(el => el.id === product.id) ? removeFromFavoriteFoods() : addToFavoritesFoods()" class="button" :class="{ 'button--alert': getFavoriteFoods.some(el => el.id === product.id) }">
+					<transition name="fade-out-in" mode="out-in">
+						<span key="remove" v-if="getFavoriteFoods.some(el => el.id === product.id)">
+							<i class="far fa-trash-alt u-mr"></i>
+							<span>Remove from favorite foods</span>
+						</span>
+						<span key="add" v-else>
+							<i class="fas fa-plus u-mr"></i>
+							<span>Add to favorite foods</span>
+						</span>
+					</transition>
 				</button>
 			</div>
 		</div>
@@ -129,6 +133,7 @@ export default {
 		flex-wrap: wrap;
 		margin-top: 15px;
 		padding-top: 15px;
+		color: #434343;
 		+ .nutriments__row {
 			border-top: 1px solid grey;
 		}
