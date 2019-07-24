@@ -2,7 +2,7 @@
 	<div id="app">
 		<div class="nav">
 			<router-link class="nav__link" to="/foods">
-				<i class="fas fa-drumstick-bite"></i>
+				<i class="fas fa-carrot"></i>
 			</router-link>
 			<router-link class="nav__link" to="/meals">
 				<i class="fas fa-utensils"></i>
@@ -152,6 +152,7 @@
 		width: 30px;
 		height: 30px;
 		font-size: 16px;
+		line-height: 16px;
 		background-color: #535c68;
 		border-radius: 50%;
 	}
@@ -173,6 +174,10 @@
 		&:focus {
 			outline: none;
 		}
+	}
+
+	.button--alert {
+		background-color: #ec5555;
 	}
 
 	.search {

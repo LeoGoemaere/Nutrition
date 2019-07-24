@@ -36,7 +36,8 @@ export default new Router({
 			]
 		},
 		{
-			path: '/details/:view/:id',
+			// path: '/details/:view/:id',
+			path: '/foods/details/:view/:id',
 			name: 'details',
 			props: true,
 			component: () => import(/* webpackChunkName: "about" */ './views/FoodDetails.vue')

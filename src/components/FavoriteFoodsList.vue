@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div  v-if="getFavoriteFoods.length > 0" class="search__content u-mb">
+		<div v-if="getFavoriteFoods.length > 0" class="search__content u-mb">
 			<div class="search__inner">
 				<input class="search__input" v-model="filterRequest" type="text" placeholder="Or search for food..">
 					<button class="search__button" @click="filterRequest ? clearFilterRequest() : null" :class="{ 'search__button--inactive': !filterRequest, 'search__button--red': filterRequest }">

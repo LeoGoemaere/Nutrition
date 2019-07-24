@@ -70,10 +70,6 @@ export default {
 		searchProducts(e) {
 			this.userRequest = e.target.value;
 		},
-		test: function(e) {
-			debugger;
-			e.preventDefault();
-		},
 		searching: function() {
 			const request = new Request(`https://world.openfoodfacts.org/cgi/search.pl?search_terms=${this.userRequest}&search_simple=1&action=process&json=1`);
 			fetch(request)
@@ -105,7 +101,6 @@ export default {
 			// Store the selected favorite foods.
 			this.$store.commit('updateMyFoods', this.favoriteFoods);
 			// Then reset the datas
-			this.searchResults = null;
 			this.isFoodsSelected = false;
 			// And return to the foods view.
 			this.$router.push({ path: '/foods' });
