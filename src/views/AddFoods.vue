@@ -1,10 +1,10 @@
 <template>
 	<div>
-		<div class="addFoods__layer">
+		<div class="push-layer">
 			<div class="search">
 				<div class="button-container space-x">
 					<button class="back-button" @click="backToFavorite"><i class="fas fa-chevron-left"></i></button>
-					<button @click="addToFavoriteFoods" class="addFoods__done" :class="{ 'disabled': !isFoodsSelected }">Done</button>
+					<button @click="addToFavoriteFoods" class="done-button" :class="{ 'disabled': !isFoodsSelected }">Done</button>
 				</div>
 				<div class="search__content">
 					<div class="search__inner">
@@ -117,30 +117,4 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 
-	.addFoods__layer {
-		background-color: #fff;
-		position: fixed;
-		left: 0;
-		right: 0;
-		top: 0;
-		bottom: 0;
-		overflow: auto;
-		z-index: 1;
-	}
-	.back-button {
-		border: none;
-		background: none;
-		color: #3ae374;
-		font-size: 25px;
-		margin: 10px 0;
-	}
-	.addFoods__done {
-		background: none;
-		border: none;
-		text-transform: uppercase;
-		color: #3ae374;
-		&.disabled {
-			opacity: .5;
-		}
-	}
 </style>

@@ -2,27 +2,13 @@
 	<div class="meals">
 		<div class="heading space-x">
 			<h1>My Meals</h1>
+			<router-link to="/meals/add" class="add-button">+</router-link>
+			<transition name="sliding-on-top">
+				<router-view></router-view>
+			</transition>
 		</div>
-		<div class="space-x">
-			<button class="button">
-				<i class="fas fa-plus u-mr"></i>
-				<span>Create a new meal</span>
-			</button>
-			<!-- Create meal popin -->
-			<div :class="" class="popin__element">
-				<p class="popin__title">Create a meal</p>
-				<div class="popin__input-row">
-					<input type="text" class="popin__row" placeholder="Meal name" />
-				</div>
-				<div class="popin__buttons">
-					<button class="button-action" @click="">Cancel</button>
-					<button :class="" class="button-action" @click="">Create</button>
-				</div>
-			</div>
-			<div :class="" class="popin__overlay" @click=""></div>
-		</div>
-		<div class="space-x u-mt">
-			<div class="meal__row">
+		<div class="meal__list">
+			<div class="meal__row space-x meal__row--active">
 				<p class="meal__title">
 					<span>Breakfast</span>
 					<i class="fas fa-chevron-down icon-chevron"></i>
@@ -66,13 +52,13 @@
 					</div>
 				</div>
 			</div>
-			<div class="meal__row">
+			<div class="meal__row space-x">
 				<p class="meal__title">
 					<span>Lunch</span>
 					<i class="fas fa-chevron-down icon-chevron"></i>
 				</p>
 			</div>
-			<div class="meal__row">
+			<div class="meal__row space-x">
 				<p class="meal__title">
 					<span>Lunch</span>
 					<i class="fas fa-chevron-down icon-chevron"></i>
@@ -98,12 +84,16 @@ export default {
 		text-align: center;
 	}
 
+	.meal__list {
+		margin-top: 25px;
+	}
+
 	.meal__recap {
 		display: flex;
 		justify-content: space-evenly;
 		padding: 10px 0;
 		background-color: #696969;
-		color: #dcdcdc;
+		color: #fff;
 		margin-bottom: 5px;
 		border-radius: 3px;
 		font-size: 13px;
@@ -118,17 +108,38 @@ export default {
 			border-top: 1px solid #d7d7d7;
 		}
 	}
+	.meal__row--active {
+		background-color: #f5f5f5;
+		padding-bottom: 15px;
+	}
 	.meal__title {
 		display: flex;
-		justify-content: space-between;
 		padding: 15px 0;
 		font-size: 20px;
 		align-items: center;
+		&::before {
+			content: "";
+			display: block;
+			width: 5px;
+			height: 5px;
+			border-radius: 50%;
+			background-color: #535c68;
+			margin-right: 10px;
+		}
 	}
 
 	.meal__details {
 		padding: 0 10px;
 		border-left: 1px solid #d7d7d7;
-		margin-bottom: 15px;
+		display: none;
+		.meal__row--active & {
+			display: block;
+		}
+	}
+
+	.icon-chevron {
+		.meal__row--active & {
+			transform: rotate(180deg);
+		}
 	}
 </style>

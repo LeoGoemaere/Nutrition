@@ -178,6 +178,23 @@
 		border-radius: 50%;
 	}
 
+	.back-button {
+		border: none;
+		background: none;
+		color: #3ae374;
+		font-size: 25px;
+		margin: 10px 0;
+	}
+	.done-button {
+		background: none;
+		border: none;
+		text-transform: uppercase;
+		color: #3ae374;
+		&.disabled {
+			opacity: .5;
+		}
+	}
+
 	.button-action {
 		background: none;
 		border: none;
@@ -296,8 +313,9 @@
 	}
 
 	.icon-chevron {
-		color: #787878;
-		font-size: 15px;
+		color: #bcbcbc;
+		font-size: 10px;
+		margin-left: auto;
 	}
 
 	// Popin
@@ -362,6 +380,32 @@
 		&.is-active {
 			display: block;
 		}
+	}
+
+	// Push layer
+	.push-layer {
+		background-color: #fff;
+		position: fixed;
+		left: 0;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		overflow: auto;
+		z-index: 1;
+	}
+
+	// Form
+	.label {
+		display: block;
+		font-size: 20px;
+	}
+
+	.input {
+		padding: 15px 15px;
+		width: 100%;
+		border: none;
+		border-top: 1px solid #d7d7d7;
+		border-bottom: 1px solid #d7d7d7;
 	}
 
 </style>

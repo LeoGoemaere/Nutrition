@@ -2,7 +2,7 @@
 	<div>
 		<div v-if="getFavoriteFoods.length > 0" class="search__content u-mb">
 			<div class="search__inner">
-				<input class="search__input" v-model="filterRequest" type="text" placeholder="Or search for food..">
+				<input class="search__input" v-model="filterRequest" type="text" placeholder="Search...">
 					<button class="search__button" @click="filterRequest ? clearFilterRequest() : null" :class="{ 'search__button--inactive': !filterRequest, 'search__button--red': filterRequest }">
 						<transition mode="out-in">
 							<i class="fas fa-search" v-if="!filterRequest" key="search"></i>
@@ -14,14 +14,10 @@
 		<div class="foods__row" 
 			 v-for="food in filterFavoriteFoods"
 			 :key="food.key"
+			 @click="view === 'AddMeal' ? selectForNewMeal($event) : ''"
 		>
 			<img class="foods__image" :src="food.image_url" alt="">
 			<div class="foods__name">{{food.product_name}}</div>
-			<div class="u-mr u-ml">
-				<router-link :to="{ name: 'details', params: { id: food._id, view: 'foods' } }" class="search__results-btn-detail">
-					<i class="far fa-question-circle"></i>
-				</router-link>
-			</div>
 		</div>
 	</div>
 </template>

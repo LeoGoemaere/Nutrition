@@ -32,7 +32,7 @@ export default {
 		display: flex;
 		align-items: center;
 		box-shadow: 0px 1px 4px -2px;
-    		border-radius: 5px;
+    	border-radius: 5px;
 		width: 100%;
 		background-color: #fff;
 		+ .foods__row {
