@@ -18,7 +18,7 @@
 			<img class="foods__image" :src="food.image_url" alt="">
 			<div class="foods__name">{{food.product_name}}</div>
 			<div class="u-mr u-ml">
-				<router-link :to="{ name: 'details', params: { id: food.id, view: 'foods' } }" class="search__results-btn-detail">
+				<router-link :to="{ name: 'details', params: { id: food._id, view: 'foods' } }" class="search__results-btn-detail">
 					<i class="far fa-question-circle"></i>
 				</router-link>
 			</div>

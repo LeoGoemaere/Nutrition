@@ -9,7 +9,19 @@
 				<h1>{{this.product.product_name}}</h1>
 			</div>
 			<div class="nutriments">
-				<p class="space-x nutriments__dose">Informations for 100g</p>
+				<div class="space-x nutriments__dose">
+					<p>Informations for 100g</p>
+					<button @click="getFavoriteFoods.some(el => el.id === product.id) ? removeFromFavoriteFoods() : addToFavoritesFoods()" class="check-button" :class="{ 'check-button--ischecked': getFavoriteFoods.some(el => el.id === product.id) }">
+						<transition name="fade-out-in" mode="out-in">
+							<span key="remove" v-if="getFavoriteFoods.some(el => el.id === product.id)">
+								<i class="fas fa-check"></i>
+							</span>
+							<span key="add" v-else>
+								<i class="fas fa-plus"></i>
+							</span>
+						</transition>
+				</button>
+				</div>
 				<div class="u-mt space-x nutriments__row">
 					<p class="nutriments__label">
 						<i class="fas fa-fire-alt icon--cal u-mr"></i>
@@ -40,18 +52,7 @@
 				</div>
 			</div>
 			<div class="space-x">
-				<button @click="getFavoriteFoods.some(el => el.id === product.id) ? removeFromFavoriteFoods() : addToFavoritesFoods()" class="button" :class="{ 'button--alert': getFavoriteFoods.some(el => el.id === product.id) }">
-					<transition name="fade-out-in" mode="out-in">
-						<span key="remove" v-if="getFavoriteFoods.some(el => el.id === product.id)">
-							<i class="far fa-trash-alt u-mr"></i>
-							<span>Remove from favorite foods</span>
-						</span>
-						<span key="add" v-else>
-							<i class="fas fa-plus u-mr"></i>
-							<span>Add to favorite foods</span>
-						</span>
-					</transition>
-				</button>
+				
 			</div>
 		</div>
 	</div>
@@ -125,6 +126,9 @@ export default {
 
 	.nutriments__dose {
 		font-weight: 700;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
 	}
 
 	.nutriments__row {
@@ -137,6 +141,17 @@ export default {
 		+ .nutriments__row {
 			border-top: 1px solid grey;
 		}
+	}
+
+	.check-button {
+		border: none;
+		background: none;
+		color: #535c68;
+		outline: none;
+		font-size: 18px;
+	}
+	.check-button--ischecked {
+		color: #3ae374;
 	}
 
 	.food__figure {
