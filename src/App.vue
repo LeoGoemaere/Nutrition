@@ -81,6 +81,10 @@
 		padding-left: 10px;
 		padding-right: 10px;
 	}
+	.space-y {
+		padding-top: 10px;
+		padding-bottom: 10px;
+	}
 
 	h1 {
 		margin: 15px 0;
@@ -172,6 +176,18 @@
 		line-height: 16px;
 		background-color: #535c68;
 		border-radius: 50%;
+	}
+
+	.button-action {
+		background: none;
+		border: none;
+		color: black;
+		font-size: 17px;
+		color: #3ae374;
+	}
+
+	.button-action--disabled {
+		opacity: 0.3;
 	}
 
 	.button {
@@ -276,6 +292,75 @@
 		&.search__button--red {
 			background-color: #b9b9b9;
 			transition: background-color .2s ease-out;
+		}
+	}
+
+	.icon-chevron {
+		color: #787878;
+		font-size: 15px;
+	}
+
+	// Popin
+	.popin__title {
+		color: #000;
+		font-size: 17px;
+		font-weight: 600;
+		padding: 15px 20px;
+		border-bottom: 1px solid #e0e0e0;
+	}
+	.popin__element {
+		display: none;
+		position: fixed;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		z-index: 10;
+		background-color: #fff;
+		width: 80vw;
+		border-radius: 5px;
+		overflow: hidden;
+		opacity: 0;
+		transition: opacity .3s ease-out;
+		&.is-active {
+			display: block;
+			opacity: 1;
+			transition: opacity .3s ease-out;
+		}
+	}
+	.popin__input-row {
+		border-bottom: 1px solid;
+		border-color: #e0e0e0;
+	}
+	.popin__row {
+		border: none;
+		height: 44px;
+		line-height: 44px;
+		font-size: 17px;
+		width: 100%;
+		padding: 0 20px;
+		color: #737373;
+		box-sizing: border-box;
+	}
+	.popin__row + .popin__row {
+		border-top: none;
+	}
+	.popin__buttons {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 15px 20px;
+	}
+	.popin__overlay {
+		display: none;
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background-color: rgba(0, 0, 0, .3);
+		z-index: 5;
+		&.is-active {
+			display: block;
 		}
 	}
 
