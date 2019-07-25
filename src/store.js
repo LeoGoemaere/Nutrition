@@ -5,17 +5,24 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
 	state: {
-		favoriteFoods: []
+		favoriteFoods: [],
+		meals: []
 	},
 	mutations: {
 		updateMyFoods(state, foods) {
 			state.favoriteFoods = foods;
-		}
+		},
+		updateMeals(state, meals) {
+			state.meals = meals;
+		},
 	},
 	getters: {
 		getFavoriteFoods: (state) => {
 			return state.favoriteFoods;
-		} 
+		},
+		getMeals: (state) => {
+			return state.meals;
+		}
 	},
 	actions: {
 

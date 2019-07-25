@@ -14,16 +14,22 @@
 		<div class="foods__row" 
 			 v-for="food in filterFavoriteFoods"
 			 :key="food.key"
-			 @click="view === 'AddMeal' ? selectForNewMeal($event) : ''"
-		>
+			 @click="foodRowClicked(food, $event)"
+			 >
 			<img class="foods__image" :src="food.image_url" alt="">
 			<div class="foods__name">{{food.product_name}}</div>
+			<div class="u-mr u-ml">
+				<button class="foods__btn-checked js-checked-btn">
+					<i class="far fa-check-circle"></i>
+				</button>
+			</div>
 		</div>
 	</div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
+import { EventBus } from '@/event-bus';
 
 export default {
 	name: "FavoriteFoodsList",
@@ -44,6 +50,10 @@ export default {
 		},
 		clearFilterRequest() {
 			this.filterRequest = null;
+		},
+		foodRowClicked: function(food, event) {
+			const datas = { food, event	}
+			EventBus.$emit('food-row:clicked', datas);
 		}
 	},
 	computed: {

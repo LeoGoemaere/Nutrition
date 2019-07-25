@@ -28,17 +28,6 @@ export default {
 
 <style lang="scss">
 
-	.foods__row {
-		display: flex;
-		align-items: center;
-		box-shadow: 0px 1px 4px -2px;
-    	border-radius: 5px;
-		width: 100%;
-		background-color: #fff;
-		+ .foods__row {
-			margin-top: 5px;
-		}
-	}
 	.foods__image {
 		width: 75px;
 		height: 75px;

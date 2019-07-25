@@ -4,7 +4,7 @@
 			<div class="search">
 				<div class="button-container space-x">
 					<button class="back-button" @click="backToFavorite"><i class="fas fa-chevron-left"></i></button>
-					<button @click="addToFavoriteFoods" class="done-button" :class="{ 'disabled': !isFoodsSelected }">Done</button>
+					<button @click="addToFavoriteFoods" class="ui-bar-button" :class="{ 'disabled': !isFoodsSelected }">Done</button>
 				</div>
 				<div class="search__content">
 					<div class="search__inner">
@@ -24,6 +24,7 @@
 					<div class="foods__row" 
 						v-for="(food, index) in searchResults.products"
 						:key="food.key"
+						:class="{'active': getFavoriteFoods.some(el => el.id === food.id)}"
 						@click="selectedFavoriteFoods($event, index)"
 					>
 						<img class="foods__image" :src="food.image_url" alt="">
@@ -34,7 +35,7 @@
 							</router-link>
 						</div>
 						<div class="u-mr u-ml">
-							<button class="search__results-btn-checked js-checked-btn" :class="{'active': getFavoriteFoods.some(el => el.id === food.id)}">
+							<button class="foods__btn-checked js-checked-btn">
 								<i class="far fa-check-circle"></i>
 							</button>
 						</div>
@@ -82,14 +83,14 @@ export default {
 		selectedFavoriteFoods: function(event, index) {
 			let selectedProduct = this.searchResults.products[index];
 			// Add or remove the selected product from favorite list.
-			const isFoodSelected = event.currentTarget.querySelector('.js-checked-btn').classList.contains('active');
+			const isFoodSelected = event.currentTarget.classList.contains('active');
 			if (isFoodSelected) {
 				this.favoriteFoods = this.favoriteFoods.filter(el => el.id !== selectedProduct.id);
 			} else {
 				this.favoriteFoods.push(selectedProduct);
 			}
 			// TODO: Reset the active class when user make an other search request without confirm with the done button.
-			event.currentTarget.querySelector('.js-checked-btn').classList.toggle('active');
+			event.currentTarget.classList.toggle('active');
 
 			// Enable the done button if needed.
 			const isFavoriteFoodsSuperiorFromStore = this.favoriteFoods.length > this.getFavoriteFoods.length;

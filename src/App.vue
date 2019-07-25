@@ -185,7 +185,7 @@
 		font-size: 25px;
 		margin: 10px 0;
 	}
-	.done-button {
+	.ui-bar-button {
 		background: none;
 		border: none;
 		text-transform: uppercase;
@@ -242,23 +242,6 @@
 
 	.search__results {
 		padding: 10px 20px 50px;
-	}
-
-
-	.search__results-btn-checked {
-		border: none;
-		background: none;
-		font-size: 18px;
-		font-weight: 700;
-		color: #3ae374;
-		opacity: 0;
-		transform: scale(.4);
-		transition: opacity .2s ease-out, transform .2s ease-out;
-		&.active { 
-			opacity: 1;
-			transform: scale(1);
-			transition: opacity .2s ease-out, transform .2s ease-out;
-		}
 	}
 
 	.search__results-btn-detail {
@@ -406,6 +389,36 @@
 		border: none;
 		border-top: 1px solid #d7d7d7;
 		border-bottom: 1px solid #d7d7d7;
+		&.error {
+			border-color: red;
+		}
 	}
 
+	.foods__row {
+		display: flex;
+		align-items: center;
+		box-shadow: 0px 1px 4px -2px;
+    	border-radius: 5px;
+		width: 100%;
+		background-color: #fff;
+		+ .foods__row {
+			margin-top: 5px;
+		}
+	}
+
+	.foods__btn-checked {
+		border: none;
+		background: none;
+		font-size: 18px;
+		font-weight: 700;
+		color: #3ae374;
+		opacity: 0;
+		transform: scale(.4);
+		transition: opacity .2s ease-out, transform .2s ease-out;
+		.active & { 
+			opacity: 1;
+			transform: scale(1);
+			transition: opacity .2s ease-out, transform .2s ease-out;
+		}
+	}
 </style>

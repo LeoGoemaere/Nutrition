@@ -3,16 +3,20 @@
 		<div class="heading space-x">
 			<h1>My Meals</h1>
 			<router-link to="/meals/add" class="add-button">+</router-link>
+
 			<transition name="sliding-on-top">
 				<router-view></router-view>
 			</transition>
 		</div>
 		<div class="meal__list">
 			<div class="meal__row space-x meal__row--active">
-				<p class="meal__title">
+				<div class="meal__title">
 					<span>Breakfast</span>
-					<i class="fas fa-chevron-down icon-chevron"></i>
-				</p>
+					<div class="meal__edit-container">
+						<button class="ui-bar-button u-mr">Edit</button>
+						<i class="fas fa-chevron-down icon-chevron"></i>
+					</div>
+				</div>
 				<div class="meal__details">
 					<div class="meal__recap">
 						<p class="nutriments__label">
@@ -53,26 +57,38 @@
 				</div>
 			</div>
 			<div class="meal__row space-x">
-				<p class="meal__title">
+				<div class="meal__title">
 					<span>Lunch</span>
-					<i class="fas fa-chevron-down icon-chevron"></i>
-				</p>
+					<div class="meal__edit-container">
+						<button class="ui-bar-button u-mr">Edit</button>
+						<i class="fas fa-chevron-down icon-chevron"></i>
+					</div>
+				</div>
 			</div>
 			<div class="meal__row space-x">
-				<p class="meal__title">
+				<div class="meal__title">
 					<span>Lunch</span>
-					<i class="fas fa-chevron-down icon-chevron"></i>
-				</p>
+					<div class="meal__edit-container">
+						<button class="ui-bar-button u-mr">Edit</button>
+						<i class="fas fa-chevron-down icon-chevron"></i>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 
 export default {
 	name: 'meals',
 	components: {
+	},
+	computed: {
+		...mapGetters([
+			'getMeals',
+		])
 	}
 }
 </script>
@@ -92,8 +108,8 @@ export default {
 		display: flex;
 		justify-content: space-evenly;
 		padding: 10px 0;
-		background-color: #696969;
-		color: #fff;
+		background-color: #fff;
+		color: #535c68;
 		margin-bottom: 5px;
 		border-radius: 3px;
 		font-size: 13px;
@@ -135,6 +151,12 @@ export default {
 		.meal__row--active & {
 			display: block;
 		}
+	}
+
+	.meal__edit-container {
+		margin-left: auto;
+		display: flex;
+		align-items: center;
 	}
 
 	.icon-chevron {
