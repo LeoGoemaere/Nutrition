@@ -2,11 +2,14 @@
 	<div class="push-layer">
         <div class="button-container space-x">
             <button class="back-button" @click="backToMeals"><i class="fas fa-chevron-left"></i></button>
+	    <p>Create a new meal</p>
             <button @click="createMeal" class="ui-bar-button" :class="{ 'disabled': meal.name === '' || !meal.name }">Done</button>
         </div>
         <div class="addmeal">
-            <label class="label space-x" for="">Meal's name</label>
-            <input class="input u-mt js-input-name" v-model="meal.name" placeholder="name" type="text">
+            <label class="label space-x" for="">Name</label>
+            <div class="input-container u-mt js-input-container" :class="toggleInputError">
+		    <input class="input" v-model="meal.name" placeholder="Required" type="text">
+	    </div>
         </div>
         <div class="u-mt">
             <FavoriteFoodsList />
@@ -62,20 +65,27 @@ export default {
 		},
 		createMeal() {
 			const isMealNameFill = this.meal.name === null || this.meal.name === '';
-			const inputElement = document.querySelector('.js-input-name');
 			if (isMealNameFill) {
-				inputElement.classList.add('error');
+				this.addInputError();
 				return;
+			} else {
+				this.meals.push(this.meal);
+				this.$store.commit('updateMeals', this.meals);
+				this.$router.push({ path: '/meals' });
 			}
-			this.meals.push(this.meal);
-			this.$store.commit('updateMeals', this.meals);
-			this.$router.push({ path: '/meals' });
+		},
+		addInputError() {
+			// Reset the meal name to trigger the computed toggleInput method.
+			this.meal.name = '';
 		}
 	},
 	computed: {
 		...mapGetters([
 			'getMeals',
-		])
+		]),
+		toggleInputError() {
+			return 	{ 'error': this.meal.name === '' }
+		}
 	}
 };
 </script>
