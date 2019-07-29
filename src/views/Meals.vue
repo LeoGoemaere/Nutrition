@@ -26,20 +26,20 @@
 						<p class="nutriments__label">
 							<i class="fas fa-fire-alt meal__recap-icon"></i>
 							<span class="meal__datas">
-								{{roundValue(convertKilojouleToKilocalorie(sum(meal.foods.map((food) => food.nutriments.energy_100g))))}} kcal
+								{{roundValue(convertKilojouleToKilocalorie(sum(meal.foods.map((food) => food.food.nutriments.energy_100g))))}} kcal
 							</span>
 						</p>
 						<p class="nutriments__label">
 							<i class="fas fa-drumstick-bite meal__recap-icon"></i>
-							<span class="meal__datas">{{roundValue(sum(meal.foods.map((food) => food.nutriments.proteins_100g)))}}</span>
+							<span class="meal__datas">{{roundValue(sum(meal.foods.map((food) => food.food.nutriments.proteins_100g)))}}</span>
 						</p>
 						<p class="nutriments__label">
 							<i class="fas fa-bread-slice meal__recap-icon"></i>
-							<span class="meal__datas">{{roundValue(sum(meal.foods.map((food) => food.nutriments.carbohydrates_100g)))}}</span>
+							<span class="meal__datas">{{roundValue(sum(meal.foods.map((food) => food.food.nutriments.carbohydrates_100g)))}}</span>
 						</p>
 						<p class="nutriments__label">
 							<i class="fas fa-fish meal__recap-icon"></i>
-							<span class="meal__datas">{{roundValue(sum(meal.foods.map((food) => food.nutriments.fat_100g)))}}</span>
+							<span class="meal__datas">{{roundValue(sum(meal.foods.map((food) => food.food.nutriments.fat_100g)))}}</span>
 						</p>
 					</div>
 					<div 
@@ -47,8 +47,8 @@
 						:key="food.key"
 						class="foods__row"
 					>
-						<img class="foods__image" :src="food.image_url" alt="">
-						<div class="foods__name">{{food.product_name}}</div>
+						<img class="foods__image" :src="food.food.image_url" alt="">
+						<div class="foods__name">{{food.food.product_name}}</div>
 						<div class="u-mr u-ml">
 							<i class="far fa-question-circle"></i>
 						</div>

@@ -11,7 +11,7 @@
 					</button>
 			</div>
 		</div>
-		<div class="foods__row" 
+		<div class="foods__row js-foods-row" 
 			 v-for="food in filterFavoriteFoods"
 			 :key="food.key"
 			 @click="foodRowClicked(food, $event)"
@@ -22,6 +22,12 @@
 				<button class="foods__btn-checked js-checked-btn">
 					<i class="far fa-check-circle"></i>
 				</button>
+			</div>
+			<div v-if="showQuantity" class="quantity">
+				<div class="quantity__content">
+					<input type="number" @change="foodQuantityChanged(food, $event)" placeholder="Quantity" class="quantity__input">
+					<span class="quantity__unit">g</span>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -34,6 +40,7 @@ import { EventBus } from '@/event-bus';
 export default {
 	name: "FavoriteFoodsList",
 	props: {
+		showQuantity: Boolean
 	},
 	data: function() {
 		return {
@@ -52,8 +59,13 @@ export default {
 			this.filterRequest = null;
 		},
 		foodRowClicked: function(food, event) {
-			const datas = { food, event	}
+			const datas = { food, event }
 			EventBus.$emit('food-row:clicked', datas);
+		},
+		foodQuantityChanged: function(food, event) {
+			const foodRowElement = event.target.closest('.js-foods-row');
+			const datas = { food, event, foodRowElement }
+			EventBus.$emit('food-row:quantity-changed', datas);
 		}
 	},
 	computed: {
@@ -70,5 +82,22 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-
+	.quantity__label {
+		font-size: 12px;
+		color: #777777;
+	}
+	.quantity__content {
+		display: flex;
+		align-items: center;
+	}
+	.quantity__unit {
+		color: #777777;
+	}
+	.quantity__input {
+		border: none;
+		border-bottom: 1px solid #d7d7d7;
+		margin-right: 10px;
+		padding: 10px 10px 10px 0;
+		max-width: 60px;
+	}
 </style>

@@ -12,7 +12,7 @@
 	    </div>
         </div>
         <div class="u-mt">
-            <FavoriteFoodsList />
+            <FavoriteFoodsList :showQuantity="true" />
         </div>
 	</div>
 </template>
@@ -35,33 +35,47 @@ export default {
 				name: null,
 				foods: []
 			},
-			foodSelected: null
+			foodSelected: {
+				quantity: null,
+				food: null
+			}
 		}
 	},
 	mounted() {
 		EventBus.$on('food-row:clicked', this.foodRowClickHandler);
+		EventBus.$on('food-row:quantity-changed', this.foodRowQuantityChangeHandler);
 
 		this.meals = JSON.parse(JSON.stringify(this.getMeals));
 	},
 	destroyed() {
 		EventBus.$off('food-row:clicked', this.foodRowClickHandler);
+		EventBus.$off('food-row:quantity-changed', this.foodRowQuantityChangeHandler);
 	},
 	methods: {
         backToMeals: function() {
 			this.$router.push({ path: '/meals' });
 		},
 		foodRowClickHandler(datas) {
-			this.foodSelected = datas.food;
-			this.selectedFoodsForMeal({ element: datas.event.currentTarget });
+			// this.foodSelected.food = datas.food;
+			// this.selectedFoodsForMeal({ element: datas.event.currentTarget });
+		},
+		foodRowQuantityChangeHandler(datas) {
+			// Get the quantity chosed.
+			const quantity = parseInt(datas.event.target.value, 10);
+			this.foodSelected.food = datas.food;
+			this.foodSelected.quantity = quantity;
+			this.selectedFoodsForMeal({ element: datas.foodRowElement });
 		},
 		selectedFoodsForMeal({ element }) {
-			const isFoodAlreadyInMeal = this.meal.foods.some(element => element._id === this.foodSelected._id);
-			if (!isFoodAlreadyInMeal) {
-				this.meal.foods.push(this.foodSelected);
+			const isQuantitySet = this.foodSelected.quantity > 0;
+			if (isQuantitySet) {
+				// Use spread operator to shallow-cloning this.foodSelected.
+				this.meal.foods.push({...this.foodSelected});
+				element.classList.add('active');
 			} else {
-				this.meal.foods = this.meal.foods.filter(element => !element._id === this.foodSelected._id);
+				this.meal.foods = this.meal.foods.filter(food => food.food._id !== this.foodSelected.food._id);
+				element.classList.remove('active');
 			}
-			element.classList.toggle('active');
 		},
 		createMeal() {
 			const isMealNameFill = this.meal.name === null || this.meal.name === '';
