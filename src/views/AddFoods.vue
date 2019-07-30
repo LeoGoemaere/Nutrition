@@ -24,7 +24,7 @@
 					<div class="foods__row" 
 						v-for="(food, index) in searchResults.products"
 						:key="food.key"
-						:class="{'active': getFavoriteFoods.some(el => el.id === food.id)}"
+						:class="{'active': favoriteFoods.some(el => el.food._id === food._id)}"
 						@click="selectedFavoriteFoods($event, index)"
 					>
 						<img class="foods__image" :src="food.image_url" alt="">
@@ -82,20 +82,15 @@ export default {
 		},
 		selectedFavoriteFoods: function(event, index) {
 			let selectedProduct = this.searchResults.products[index];
-			// Add or remove the selected product from favorite list.
 			const isFoodSelected = event.currentTarget.classList.contains('active');
 			if (isFoodSelected) {
-				this.favoriteFoods = this.favoriteFoods.filter(el => el.id !== selectedProduct.id);
+				this.favoriteFoods = this.favoriteFoods.filter(el => el.food._id !== selectedProduct._id);
 			} else {
-				this.favoriteFoods.push(selectedProduct);
+				this.favoriteFoods.push({ food: selectedProduct, isSelected: false,  quantity: null });
 			}
-			// TODO: Reset the active class when user make an other search request without confirm with the done button.
-			event.currentTarget.classList.toggle('active');
-
-			// Enable the done button if needed.
-			const isFavoriteFoodsSuperiorFromStore = this.favoriteFoods.length > this.getFavoriteFoods.length;
-			const isFavoriteFoodsContainsEveryItemFromStore = this.getFavoriteFoods.map(food => food.id).every(id => this.favoriteFoods.map(food => food.id).includes(id));
-			!isFavoriteFoodsContainsEveryItemFromStore || isFavoriteFoodsSuperiorFromStore ? this.isFoodsSelected = true : this.isFoodsSelected = false;
+			const isFavoriteFoodsdifferentFromstore = this.getFavoriteFoods.length !== this.favoriteFoods.length;
+			const isFavoriteFoodsContainsEveryItemFromStore = this.getFavoriteFoods.map(el => el.food._id).every(id => this.favoriteFoods.map(el => el.food._id).includes(id));
+			this.isFoodsSelected = isFavoriteFoodsdifferentFromstore || !isFavoriteFoodsContainsEveryItemFromStore;
 		},
 		addToFavoriteFoods: function() {
 			if (!this.isFoodsSelected) return;

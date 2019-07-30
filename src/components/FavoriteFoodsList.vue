@@ -14,10 +14,10 @@
 		<div class="foods__row js-foods-row" 
 			 v-for="food in filterFavoriteFoods"
 			 :key="food.key"
-			 @click="foodRowClicked(food, $event)"
+			 :class="{ 'active': food.isSelected }"
 			 >
-			<img class="foods__image" :src="food.image_url" alt="">
-			<div class="foods__name">{{food.product_name}}</div>
+			<img class="foods__image" :src="food.food.image_url" alt="">
+			<div class="foods__name">{{food.food.product_name}}</div>
 			<div class="u-mr u-ml">
 				<button class="foods__btn-checked js-checked-btn">
 					<i class="far fa-check-circle"></i>
@@ -25,7 +25,7 @@
 			</div>
 			<div v-if="showQuantity" class="quantity">
 				<div class="quantity__content">
-					<input type="number" @change="foodQuantityChanged(food, $event)" placeholder="Quantity" class="quantity__input">
+					<input type="number" :value="food.quantity" @change="foodQuantityChanged(food, $event)" placeholder="Quantity" class="quantity__input">
 					<span class="quantity__unit">g</span>
 				</div>
 			</div>
@@ -40,12 +40,18 @@ import { EventBus } from '@/event-bus';
 export default {
 	name: "FavoriteFoodsList",
 	props: {
-		showQuantity: Boolean
+		showQuantity: Boolean,
+		foods: Array
 	},
 	data: function() {
 		return {
-			filterRequest: null
+			filterRequest: null,
+			food: null,
+			favoriteFoods: null
 		}
+	},
+	mounted() {
+		this.favoriteFoods = JSON.parse(JSON.stringify(this.foods));
 	},
 	methods: {
 		convertToLowerCase: function(string) {
@@ -58,20 +64,17 @@ export default {
 		clearFilterRequest() {
 			this.filterRequest = null;
 		},
-		foodRowClicked: function(food, event) {
-			const datas = { food, event }
-			EventBus.$emit('food-row:clicked', datas);
-		},
 		foodQuantityChanged: function(food, event) {
-			const foodRowElement = event.target.closest('.js-foods-row');
-			const datas = { food, event, foodRowElement }
-			EventBus.$emit('food-row:quantity-changed', datas);
+			const quantity = parseInt(event.target.value, 10);
+			const isQuantitySet = quantity > 0;
+			this.food = isQuantitySet ? { food, isSelected: true, quantity } : { food, isSelected: false, quantity: null };
+			EventBus.$emit('food-row:quantity-changed', this.food);
 		}
 	},
 	computed: {
 		filterFavoriteFoods: function () {
-			if (!this.filterRequest) return this.getFavoriteFoods;
-			return this.getFavoriteFoods.filter(food => this.convertToDiacriticInsensitive(this.convertToLowerCase(food.product_name)).includes(this.convertToDiacriticInsensitive(this.convertToLowerCase(this.filterRequest))));
+			if (!this.filterRequest) return this.foods;
+			return this.foods.filter(food => this.convertToDiacriticInsensitive(this.convertToLowerCase(food.food.product_name)).includes(this.convertToDiacriticInsensitive(this.convertToLowerCase(this.filterRequest))));
 		},
 		...mapGetters([
 			'getFavoriteFoods',

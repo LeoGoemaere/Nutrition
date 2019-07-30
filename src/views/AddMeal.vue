@@ -12,7 +12,7 @@
 	    </div>
         </div>
         <div class="u-mt">
-            <FavoriteFoodsList :showQuantity="true" />
+            <FavoriteFoodsList :showQuantity="true" :foods="foods" />
         </div>
 	</div>
 </template>
@@ -35,47 +35,34 @@ export default {
 				name: null,
 				foods: []
 			},
-			foodSelected: {
-				quantity: null,
-				food: null
-			}
+			foods: null
 		}
 	},
 	mounted() {
-		EventBus.$on('food-row:clicked', this.foodRowClickHandler);
 		EventBus.$on('food-row:quantity-changed', this.foodRowQuantityChangeHandler);
 
 		this.meals = JSON.parse(JSON.stringify(this.getMeals));
+		this.foods = JSON.parse(JSON.stringify(this.getFavoriteFoods));
 	},
 	destroyed() {
-		EventBus.$off('food-row:clicked', this.foodRowClickHandler);
 		EventBus.$off('food-row:quantity-changed', this.foodRowQuantityChangeHandler);
 	},
 	methods: {
-        backToMeals: function() {
+        	backToMeals: function() {
 			this.$router.push({ path: '/meals' });
 		},
-		foodRowClickHandler(datas) {
-			// this.foodSelected.food = datas.food;
-			// this.selectedFoodsForMeal({ element: datas.event.currentTarget });
+		foodRowQuantityChangeHandler(food) {
+			this.updateFood(food);
+			this.selectedFoodsForMeal();
 		},
-		foodRowQuantityChangeHandler(datas) {
-			// Get the quantity chosed.
-			const quantity = parseInt(datas.event.target.value, 10);
-			this.foodSelected.food = datas.food;
-			this.foodSelected.quantity = quantity;
-			this.selectedFoodsForMeal({ element: datas.foodRowElement });
+		updateFood(food) {
+			// pass the food to selected state.
+			this.foods.find(el => el.food._id === food.food.food._id).isSelected = food.isSelected;
+			this.foods.find(el => el.food._id === food.food.food._id).quantity = food.quantity;
 		},
-		selectedFoodsForMeal({ element }) {
-			const isQuantitySet = this.foodSelected.quantity > 0;
-			if (isQuantitySet) {
-				// Use spread operator to shallow-cloning this.foodSelected.
-				this.meal.foods.push({...this.foodSelected});
-				element.classList.add('active');
-			} else {
-				this.meal.foods = this.meal.foods.filter(food => food.food._id !== this.foodSelected.food._id);
-				element.classList.remove('active');
-			}
+		selectedFoodsForMeal() {
+			const foodsSelected = this.foods.filter(food => food.isSelected);
+			this.meal.foods = [...foodsSelected];
 		},
 		createMeal() {
 			const isMealNameFill = this.meal.name === null || this.meal.name === '';
@@ -96,6 +83,7 @@ export default {
 	computed: {
 		...mapGetters([
 			'getMeals',
+			'getFavoriteFoods'
 		]),
 		toggleInputError() {
 			return 	{ 'error': this.meal.name === '' }
