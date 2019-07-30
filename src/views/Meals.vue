@@ -26,20 +26,21 @@
 						<p class="nutriments__label">
 							<i class="fas fa-fire-alt meal__recap-icon"></i>
 							<span class="meal__datas">
-								{{roundValue(convertKilojouleToKilocalorie(sum(meal.foods.map((food) => food.food.nutriments.energy_100g))))}} kcal
+								{{ sum(meal.foods.map((food) => calculNutrimentDatas(food, convertKilojouleToKilocalorie(food.food.nutriments.energy_100g)))) }}
+								<!-- {{roundValue(convertKilojouleToKilocalorie(sum(meal.foods.map((food) => food.food.nutriments.energy_100g))))}} kcal -->
 							</span>
 						</p>
 						<p class="nutriments__label">
 							<i class="fas fa-drumstick-bite meal__recap-icon"></i>
-							<span class="meal__datas">{{roundValue(sum(meal.foods.map((food) => food.food.nutriments.proteins_100g)))}}</span>
+							<span class="meal__datas">{{ sum(meal.foods.map((food) => calculNutrimentDatas(food, food.food.nutriments.proteins_100g))) }}</span>
 						</p>
 						<p class="nutriments__label">
 							<i class="fas fa-bread-slice meal__recap-icon"></i>
-							<span class="meal__datas">{{roundValue(sum(meal.foods.map((food) => food.food.nutriments.carbohydrates_100g)))}}</span>
+							<span class="meal__datas">{{ sum(meal.foods.map((food) => calculNutrimentDatas(food, food.food.nutriments.carbohydrates_100g))) }}</span>
 						</p>
 						<p class="nutriments__label">
 							<i class="fas fa-fish meal__recap-icon"></i>
-							<span class="meal__datas">{{roundValue(sum(meal.foods.map((food) => food.food.nutriments.fat_100g)))}}</span>
+							<span class="meal__datas">{{ sum(meal.foods.map((food) => calculNutrimentDatas(food, food.food.nutriments.fat_100g))) }}</span>
 						</p>
 					</div>
 					<div 
@@ -79,7 +80,10 @@ export default {
 		sum(array) {
 			// Using parseFloat because it's possible to get a string value.
 			return array.reduce((accumulator, currentValue) => parseFloat(accumulator, 10) + parseFloat(currentValue, 10), 0);
-		}
+		},
+		calculNutrimentDatas: function(food, nutrimentValue) {
+			return this.roundValue((food.quantity * nutrimentValue) / 100);
+		},
 	},
 	computed: {
 		...mapGetters([
