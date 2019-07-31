@@ -226,6 +226,40 @@
 		transition: background-color .4s ease-out;
 	}
 
+	.filter__input {
+		width: 100%;
+		border-radius: 5px;
+		box-sizing: border-box;
+		display: block;
+		margin: auto;
+		border: none;
+		padding: 10px;
+		padding-left: 36px;
+		background-color: #f1f1f1;
+		&::placeholder {
+			color: #a9a9a9;
+		}
+	}
+
+	.filter__content {
+		margin-bottom: 30px;
+	}
+
+	.filter__button {
+		border: none;
+		cursor: pointer;
+		position: absolute;
+		background: none;
+		left: 0;
+		top: 0;
+		bottom: 0;
+		font-family: 'Roboto';
+		font-weight: 300;
+		font-size: 16px;
+		padding: 0 10px;
+		color: #a9a9a9;
+	}
+
 	.search {
 		position: relative;	
 	}
@@ -236,7 +270,8 @@
 		background-color: #535c68;
 	}
 
-	.search__inner {
+	.search__inner,
+	.filter__inner {
 		position: relative;
 	}
 

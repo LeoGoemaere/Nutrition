@@ -1,9 +1,9 @@
 <template>
-	<div>
-		<div v-if="getFavoriteFoods.length > 0" class="search__content u-mb">
-			<div class="search__inner">
-				<input class="search__input" v-model="filterRequest" type="text" placeholder="Search...">
-					<button class="search__button" @click="filterRequest ? clearFilterRequest() : null" :class="{ 'search__button--inactive': !filterRequest, 'search__button--red': filterRequest }">
+	<div class="space-x">
+		<div v-if="getFavoriteFoods.length > 0" class="filter__content">
+			<div class="filter__inner">
+				<input class="filter__input" v-model="filterRequest" type="text" placeholder="Search...">
+					<button class="filter__button" @click="filterRequest ? clearFilterRequest() : null" :class="{ 'search__button--inactive': !filterRequest, 'search__button--red': filterRequest }">
 						<transition mode="out-in">
 							<i class="fas fa-search" v-if="!filterRequest" key="search"></i>
 							<i class="fas fa-times" v-if="filterRequest" key="times"></i>
