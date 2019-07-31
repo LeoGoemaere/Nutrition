@@ -190,6 +190,11 @@
 		border: none;
 		text-transform: uppercase;
 		color: #3ae374;
+		align-self: stretch;
+		font-size: 14px;
+		text-decoration: none;
+		display: flex;
+		align-items: center;
 		&.disabled {
 			opacity: .5;
 		}

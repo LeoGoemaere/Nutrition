@@ -11,13 +11,12 @@
 			<div
 				v-for="meal in getMeals"
 				:key="meal.key"
-				@click="toggleAccordion($event)"
-				class="meal__row space-x"
+				class="meal__row js-meal-row space-x"
 			>
-				<div class="meal__title">
-					<span>{{meal.name}}</span>
+				<div @click="toggleAccordion($event)" class="meal__title">
+					<p>{{meal.name}}</p>
 					<div class="meal__edit-container">
-						<button class="ui-bar-button u-mr">Edit</button>
+						<router-link :to="{ name: 'edit', params: { id: meal.id } }" class="ui-bar-button js-ui-bar-button u-mr">Edit</router-link>
 						<i class="fas fa-chevron-down icon-chevron"></i>
 					</div>
 				</div>
@@ -83,7 +82,8 @@ export default {
 			return Math.ceil(value * 10) / 10;
 		},
 		toggleAccordion: function(e) {
-			e.currentTarget.classList.toggle('meal__row--active');
+			if (e.target.classList.contains('js-ui-bar-button')) return;
+			e.currentTarget.closest('.js-meal-row').classList.toggle('meal__row--active');
 		},
 		calculNutrimentDatas: function(food, meal, nutriment) {
 			const nutrimentsQuantity = meal.foods.map(food => food.food.nutriments[nutriment]).reduce((accumulator, currentValue) => parseFloat(accumulator, 10) + parseFloat(currentValue, 10), 0);
@@ -162,6 +162,7 @@ export default {
 		margin-left: auto;
 		display: flex;
 		align-items: center;
+		align-self: stretch;
 	}
 
 	.icon-chevron {

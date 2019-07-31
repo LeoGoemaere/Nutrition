@@ -20,6 +20,7 @@
 <script>
 import { mapGetters } from 'vuex';
 import { EventBus } from '@/event-bus';
+import uuid from 'uuid/v4';
 
 import FavoriteFoodsList from '@/components/FavoriteFoodsList';
 
@@ -32,6 +33,7 @@ export default {
 		return {
 			meals: null,
 			meal: {
+				id: null,
 				name: null,
 				foods: []
 			},
@@ -70,6 +72,8 @@ export default {
 				this.addInputError();
 				return;
 			} else {
+				// Generate id when create meal.
+				this.meal.id = uuid();
 				this.meals.push(this.meal);
 				this.$store.commit('updateMeals', this.meals);
 				this.$router.push({ path: '/meals' });
