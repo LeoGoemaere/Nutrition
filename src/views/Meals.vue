@@ -25,22 +25,20 @@
 					<div class="meal__recap">
 						<p class="nutriments__label">
 							<i class="fas fa-fire-alt meal__recap-icon"></i>
-							<span class="meal__datas">
-								{{ sum(meal.foods.map((food) => calculNutrimentDatas(food, convertKilojouleToKilocalorie(food.food.nutriments.energy_100g)))) }}
-								<!-- {{roundValue(convertKilojouleToKilocalorie(sum(meal.foods.map((food) => food.food.nutriments.energy_100g))))}} kcal -->
-							</span>
+							<!-- Display the calories by default -->
+							<span class="meal__datas">{{ meal.foods.map(food => roundValue(convertKilojouleToKilocalorie(calculNutrimentDatas(food, meal, nutriment.calories))))[0] }}</span>
 						</p>
 						<p class="nutriments__label">
 							<i class="fas fa-drumstick-bite meal__recap-icon"></i>
-							<span class="meal__datas">{{ sum(meal.foods.map((food) => calculNutrimentDatas(food, food.food.nutriments.proteins_100g))) }}</span>
+							<span class="meal__datas">{{ meal.foods.map(food => calculNutrimentDatas(food, meal, nutriment.proteins))[0] }}</span>
 						</p>
 						<p class="nutriments__label">
 							<i class="fas fa-bread-slice meal__recap-icon"></i>
-							<span class="meal__datas">{{ sum(meal.foods.map((food) => calculNutrimentDatas(food, food.food.nutriments.carbohydrates_100g))) }}</span>
+							<span class="meal__datas">{{ meal.foods.map(food => calculNutrimentDatas(food, meal, nutriment.carbs))[0] }}</span>
 						</p>
 						<p class="nutriments__label">
 							<i class="fas fa-fish meal__recap-icon"></i>
-							<span class="meal__datas">{{ sum(meal.foods.map((food) => calculNutrimentDatas(food, food.food.nutriments.fat_100g))) }}</span>
+							<span class="meal__datas">{{ meal.foods.map(food => calculNutrimentDatas(food, meal, nutriment.fat))[0] }}</span>
 						</p>
 					</div>
 					<div 
@@ -67,6 +65,16 @@ export default {
 	name: 'meals',
 	components: {
 	},
+	data: function() {
+		return {
+			nutriment: {
+				calories: 'energy_100g',
+				proteins: 'proteins_100g',
+				carbs: 'carbohydrates_100g',
+				fat: 'fat_100g'
+			}
+		}
+	},
 	methods: {
 		convertKilojouleToKilocalorie: function(kilojoule) {
 			return kilojoule / 4.184;
@@ -77,12 +85,9 @@ export default {
 		toggleAccordion: function(e) {
 			e.currentTarget.classList.toggle('meal__row--active');
 		},
-		sum(array) {
-			// Using parseFloat because it's possible to get a string value.
-			return array.reduce((accumulator, currentValue) => parseFloat(accumulator, 10) + parseFloat(currentValue, 10), 0);
-		},
-		calculNutrimentDatas: function(food, nutrimentValue) {
-			return this.roundValue((food.quantity * nutrimentValue) / 100);
+		calculNutrimentDatas: function(food, meal, nutriment) {
+			const nutrimentsQuantity = meal.foods.map(food => food.food.nutriments[nutriment]).reduce((accumulator, currentValue) => parseFloat(accumulator, 10) + parseFloat(currentValue, 10), 0);
+			return food.quantity * nutrimentsQuantity / 100;
 		},
 	},
 	computed: {
