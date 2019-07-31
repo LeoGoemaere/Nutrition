@@ -23,7 +23,13 @@ export default new Router({
 				{
 					path: 'add',
 					name: 'add',
-					component: () => import(/* webpackChunkName: "about" */ './views/AddMeal.vue')
+					component: () => import(/* webpackChunkName: "about" */ './views/EditMeal.vue')
+				},
+				{
+					path: 'edit/:id',
+					name: 'edit',
+					props: true,
+					component: () => import(/* webpackChunkName: "about" */ './views/EditMeal.vue')
 				},
 			]
 		},

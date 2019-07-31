@@ -2,7 +2,8 @@
 	<div class="push-layer">
         <div class="button-container space-x">
             <button class="back-button" @click="backToMeals"><i class="fas fa-chevron-left"></i></button>
-	    <p>Create a new meal</p>
+	    <p v-if="!meal.name">Meal</p>
+	    <p v-else>{{meal.name}}</p>
             <button @click="createMeal" class="ui-bar-button" :class="{ 'disabled': meal.name === '' || !meal.name }">Done</button>
         </div>
         <div class="addmeal">
@@ -28,6 +29,7 @@ export default {
     name: "AddMeal",
     components: { FavoriteFoodsList },
 	props: {
+		id: String
 	},
 	data: function() {
 		return {
@@ -42,9 +44,14 @@ export default {
 	},
 	mounted() {
 		EventBus.$on('food-row:quantity-changed', this.foodRowQuantityChangeHandler);
-
 		this.meals = JSON.parse(JSON.stringify(this.getMeals));
 		this.foods = JSON.parse(JSON.stringify(this.getFavoriteFoods));
+		if (this.id) {
+			// Update foods inside an existing meal if user is editing.
+			const meal = this.meals.find(meal => meal.id === this.id);
+			this.meal = { ...meal };
+			this.meal.foods.forEach(food => this.updateFood(food));
+		}
 	},
 	destroyed() {
 		EventBus.$off('food-row:quantity-changed', this.foodRowQuantityChangeHandler);
@@ -59,8 +66,8 @@ export default {
 		},
 		updateFood(food) {
 			// pass the food to selected state.
-			this.foods.find(el => el.food._id === food.food.food._id).isSelected = food.isSelected;
-			this.foods.find(el => el.food._id === food.food.food._id).quantity = food.quantity;
+			this.foods.find(el => el.datas._id === food.datas._id).isSelected = food.isSelected;
+			this.foods.find(el => el.datas._id === food.datas._id).quantity = food.quantity;
 		},
 		selectedFoodsForMeal() {
 			const foodsSelected = this.foods.filter(food => food.isSelected);
@@ -68,9 +75,15 @@ export default {
 		},
 		createMeal() {
 			const isMealNameFill = this.meal.name === null || this.meal.name === '';
+			const isEditing = typeof this.id !== 'undefined';
 			if (isMealNameFill) {
 				this.addInputError();
 				return;
+			} else if (isEditing) {
+				const indexOfMeal = this.meals.findIndex(el => el.id === this.id);
+				this.meals[indexOfMeal] = this.meal;
+				this.$store.commit('updateMeals', this.meals);
+				this.$router.push({ path: '/meals' });
 			} else {
 				// Generate id when create meal.
 				this.meal.id = uuid();

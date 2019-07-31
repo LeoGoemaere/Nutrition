@@ -29,15 +29,15 @@
 						</p>
 						<p class="nutriments__label">
 							<i class="fas fa-drumstick-bite meal__recap-icon"></i>
-							<span class="meal__datas">{{ meal.foods.map(food => calculNutrimentDatas(food, meal, nutriment.proteins))[0] }}</span>
+							<span class="meal__datas">{{ meal.foods.map(food => roundValue(calculNutrimentDatas(food, meal, nutriment.proteins)))[0] }}</span>
 						</p>
 						<p class="nutriments__label">
 							<i class="fas fa-bread-slice meal__recap-icon"></i>
-							<span class="meal__datas">{{ meal.foods.map(food => calculNutrimentDatas(food, meal, nutriment.carbs))[0] }}</span>
+							<span class="meal__datas">{{ meal.foods.map(food => roundValue(calculNutrimentDatas(food, meal, nutriment.carbs)))[0] }}</span>
 						</p>
 						<p class="nutriments__label">
 							<i class="fas fa-fish meal__recap-icon"></i>
-							<span class="meal__datas">{{ meal.foods.map(food => calculNutrimentDatas(food, meal, nutriment.fat))[0] }}</span>
+							<span class="meal__datas">{{ meal.foods.map(food => roundValue(calculNutrimentDatas(food, meal, nutriment.fat)))[0] }}</span>
 						</p>
 					</div>
 					<div 
@@ -45,8 +45,8 @@
 						:key="food.key"
 						class="foods__row"
 					>
-						<img class="foods__image" :src="food.food.image_url" alt="">
-						<div class="foods__name">{{food.food.product_name}}</div>
+						<img class="foods__image" :src="food.datas.image_url" alt="">
+						<div class="foods__name">{{food.datas.product_name}}</div>
 						<div class="u-mr u-ml">
 							<i class="far fa-question-circle"></i>
 						</div>
@@ -86,7 +86,7 @@ export default {
 			e.currentTarget.closest('.js-meal-row').classList.toggle('meal__row--active');
 		},
 		calculNutrimentDatas: function(food, meal, nutriment) {
-			const nutrimentsQuantity = meal.foods.map(food => food.food.nutriments[nutriment]).reduce((accumulator, currentValue) => parseFloat(accumulator, 10) + parseFloat(currentValue, 10), 0);
+			const nutrimentsQuantity = meal.foods.map(food => food.datas.nutriments[nutriment]).reduce((accumulator, currentValue) => parseFloat(accumulator, 10) + parseFloat(currentValue, 10), 0);
 			return food.quantity * nutrimentsQuantity / 100;
 		},
 	},

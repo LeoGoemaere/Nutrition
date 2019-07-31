@@ -16,8 +16,8 @@
 			 :key="food.key"
 			 :class="{ 'active': food.isSelected }"
 			 >
-			<img class="foods__image" :src="food.food.image_url" alt="">
-			<div class="foods__name">{{food.food.product_name}}</div>
+			<img class="foods__image" :src="food.datas.image_url" alt="">
+			<div class="foods__name">{{food.datas.product_name}}</div>
 			<div class="u-mr u-ml">
 				<button class="foods__btn-checked js-checked-btn">
 					<i class="far fa-check-circle"></i>
@@ -67,14 +67,14 @@ export default {
 		foodQuantityChanged: function(food, event) {
 			const quantity = parseInt(event.target.value, 10);
 			const isQuantitySet = quantity > 0;
-			this.food = isQuantitySet ? { food, isSelected: true, quantity } : { food, isSelected: false, quantity: null };
+			this.food = isQuantitySet ? { datas: { ...food.datas }, isSelected: true, quantity } : { datas: { ...food.datas }, isSelected: false, quantity: null };
 			EventBus.$emit('food-row:quantity-changed', this.food);
 		}
 	},
 	computed: {
 		filterFavoriteFoods: function () {
 			if (!this.filterRequest) return this.foods;
-			return this.foods.filter(food => this.convertToDiacriticInsensitive(this.convertToLowerCase(food.food.product_name)).includes(this.convertToDiacriticInsensitive(this.convertToLowerCase(this.filterRequest))));
+			return this.foods.filter(food => this.convertToDiacriticInsensitive(this.convertToLowerCase(food.datas.product_name)).includes(this.convertToDiacriticInsensitive(this.convertToLowerCase(this.filterRequest))));
 		},
 		...mapGetters([
 			'getFavoriteFoods',

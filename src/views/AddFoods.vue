@@ -24,7 +24,7 @@
 					<div class="foods__row" 
 						v-for="(food, index) in searchResults.products"
 						:key="food.key"
-						:class="{'active': favoriteFoods.some(el => el.food._id === food._id)}"
+						:class="{'active': favoriteFoods.some(el => el.datas._id === food._id)}"
 						@click="selectedFavoriteFoods($event, index)"
 					>
 						<img class="foods__image" :src="food.image_url" alt="">
@@ -84,12 +84,12 @@ export default {
 			let selectedProduct = this.searchResults.products[index];
 			const isFoodSelected = event.currentTarget.classList.contains('active');
 			if (isFoodSelected) {
-				this.favoriteFoods = this.favoriteFoods.filter(el => el.food._id !== selectedProduct._id);
+				this.favoriteFoods = this.favoriteFoods.filter(el => el.datas._id !== selectedProduct._id);
 			} else {
-				this.favoriteFoods.push({ food: selectedProduct, isSelected: false,  quantity: null });
+				this.favoriteFoods.push({ datas: selectedProduct, isSelected: false,  quantity: null });
 			}
 			const isFavoriteFoodsdifferentFromstore = this.getFavoriteFoods.length !== this.favoriteFoods.length;
-			const isFavoriteFoodsContainsEveryItemFromStore = this.getFavoriteFoods.map(el => el.food._id).every(id => this.favoriteFoods.map(el => el.food._id).includes(id));
+			const isFavoriteFoodsContainsEveryItemFromStore = this.getFavoriteFoods.map(el => el.datas._id).every(id => this.favoriteFoods.map(el => el.datas._id).includes(id));
 			this.isFoodsSelected = isFavoriteFoodsdifferentFromstore || !isFavoriteFoodsContainsEveryItemFromStore;
 		},
 		addToFavoriteFoods: function() {
