@@ -85,22 +85,4 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-	.quantity__label {
-		font-size: 12px;
-		color: #777777;
-	}
-	.quantity__content {
-		display: flex;
-		align-items: center;
-	}
-	.quantity__unit {
-		color: #777777;
-	}
-	.quantity__input {
-		border: none;
-		border-bottom: 1px solid #d7d7d7;
-		margin-right: 10px;
-		padding: 10px 10px 10px 0;
-		max-width: 60px;
-	}
 </style>

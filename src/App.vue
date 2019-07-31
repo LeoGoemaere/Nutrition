@@ -341,6 +341,31 @@
 		margin-left: auto;
 	}
 
+	.quantity__label {
+		font-size: 12px;
+		color: #777777;
+	}
+	.quantity__content {
+		display: flex;
+		align-items: center;
+	}
+	.quantity__unit {
+		color: #777777;
+	}
+	.quantity__input {
+		border: none;
+		border-bottom: 1px solid #d7d7d7;
+		margin-right: 10px;
+		padding: 10px 10px 10px 0;
+		max-width: 60px;
+	}
+
+	.quantity__copy {
+		color: #434343;
+		font-size: 12px;
+		padding: 0 5px;
+	}
+
 	// Popin
 	.popin__title {
 		color: #000;

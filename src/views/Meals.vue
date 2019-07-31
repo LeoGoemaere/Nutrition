@@ -47,8 +47,8 @@
 					>
 						<img class="foods__image" :src="food.datas.image_url" alt="">
 						<div class="foods__name">{{food.datas.product_name}}</div>
-						<div class="u-mr u-ml">
-							<i class="far fa-question-circle"></i>
+						<div class="quantity__content">
+							<span class="quantity__copy">{{food.quantity}} g</span>
 						</div>
 					</div>
 				</div>
