@@ -1,33 +1,29 @@
 <template>
 	<div class="space-x">
-		<div v-if="getFavoriteFoods.length > 0" class="filter__content">
-			<div class="filter__inner">
-				<input class="filter__input" v-model="filterRequest" type="text" placeholder="Search...">
-					<button class="filter__button" @click="filterRequest ? clearFilterRequest() : null" :class="{ 'search__button--inactive': !filterRequest, 'search__button--red': filterRequest }">
-						<transition mode="out-in">
-							<i class="fas fa-search" v-if="!filterRequest" key="search"></i>
-							<i class="fas fa-times" v-if="filterRequest" key="times"></i>
-						</transition>
-					</button>
-			</div>
+		<div v-if="getFavoriteFoods.length > 0" class="filter">
+			<input class="filter__input" v-model="filterRequest" type="text" placeholder="Search...">
+			<button class="filter__button" @click="filterRequest ? clearFilterRequest() : null" :class="{ 'search__button--inactive': !filterRequest, 'search__button--red': filterRequest }">
+				<transition name="fade-out-in" mode="out-in">
+					<i class="fas fa-search" v-if="!filterRequest" key="search"></i>
+					<i class="fas fa-times" v-if="filterRequest" key="times"></i>
+				</transition>
+			</button>
 		</div>
-		<div class="foods__row js-foods-row" 
+		<div class="tile__row" 
 			 v-for="food in filterFavoriteFoods"
 			 :key="food.key"
 			 :class="{ 'active': food.isSelected }"
 			 >
-			<img class="foods__image" :src="food.datas.image_url" alt="">
-			<div class="foods__name">{{food.datas.product_name}}</div>
+			<img class="tile__image" :src="food.datas.image_url" alt="">
+			<div class="tile__name">{{food.datas.product_name}}</div>
 			<div class="u-mr u-ml">
-				<button class="foods__btn-checked js-checked-btn">
+				<button class="tile__button js-checked-btn">
 					<i class="far fa-check-circle"></i>
 				</button>
 			</div>
-			<div v-if="showQuantity" class="quantity">
-				<div class="quantity__content">
-					<input type="number" :value="food.quantity" @change="foodQuantityChanged(food, $event)" placeholder="Quantity" class="quantity__input">
-					<span class="quantity__unit">g</span>
-				</div>
+			<div v-if="showQuantity" class="tile__quantity">
+				<input type="number" :value="food.quantity" @change="foodQuantityChanged(food, $event)" placeholder="Quantity" class="tile__quantity-input">
+				<span class="tile__quantity-unit">g</span>
 			</div>
 		</div>
 	</div>
@@ -83,6 +79,3 @@ export default {
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped lang="scss">
-</style>

@@ -1,0 +1,19 @@
+.nav {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	height: 50px;
+	background-color: #535c68;
+	z-index: 100;
+}
+
+.nav__link {
+	color: #fff;
+	&.router-link-active {
+		color: #3ae374;
+	}
+}

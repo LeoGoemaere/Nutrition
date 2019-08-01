@@ -23,28 +23,28 @@
 				</button>
 				</div>
 				<div class="u-mt space-x nutriments__row">
-					<p class="nutriments__label">
+					<p>
 						<i class="fas fa-fire-alt icon--cal u-mr"></i>
 						<span>Calories</span>
 					</p>
 					<span class="nutriments__datas">{{product.nutriments.energy_100g}} kj / {{roundValue(convertKilojouleToKilocalorie(product.nutriments.energy_100g))}} kcal</span>
 				</div>
 				<div class="space-x nutriments__row">
-					<p class="nutriments__label">
+					<p>
 						<i class="fas fa-drumstick-bite icon-prot u-mr"></i>
 						<span>Proteïnes</span>
 					</p>
 					<span class="nutriment__datas">{{product.nutriments.proteins_100g}}g</span>
 				</div>
 				<div class="space-x nutriments__row">
-					<p class="nutriments__label">
+					<p>
 						<i class="fas fa-bread-slice icon-carb u-mr"></i>
 						<span>Glucides</span>
 					</p>
 					<span class="nutriments__datas">{{product.nutriments.carbohydrates_100g}}g</span>
 				</div>
 				<div class="space-x nutriments__row">
-					<p class="nutriments__label">
+					<p>
 						<i class="fas fa-fish icon-fat u-mr"></i>
 						<span>Lipides</span>
 					</p>
@@ -116,51 +116,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
-	h1 {
-		font-size: 25px;
-	}
 
-	.nutriments {
-		margin-bottom: 30px;
-	}
+	// Import food details view styles.
+	@import '../styles/views/food-details';
 
-	.nutriments__dose {
-		font-weight: 700;
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-	}
-
-	.nutriments__row {
-		display: flex;
-		justify-content: space-between;
-		flex-wrap: wrap;
-		margin-top: 15px;
-		padding-top: 15px;
-		color: #434343;
-		+ .nutriments__row {
-			border-top: 1px solid grey;
-		}
-	}
-
-	.check-button {
-		border: none;
-		background: none;
-		color: #535c68;
-		outline: none;
-		font-size: 18px;
-	}
-	.check-button--ischecked {
-		color: #3ae374;
-	}
-
-	.food__figure {
-		height: 220px;
-	}
-
-	.food__image {
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-	}
 </style>

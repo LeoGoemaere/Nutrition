@@ -26,17 +26,3 @@ export default {
 }
 </script>
 
-<style lang="scss">
-
-	.foods__image {
-		width: 75px;
-		height: 75px;
-		object-fit: cover;
-		box-shadow: 1px 0 2px 0px #b3b1b1;
-	}
-	.foods__name {
-		padding-left: 10px;
-		flex: 1;
-	}
-
-</style>

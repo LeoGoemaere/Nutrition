@@ -4,9 +4,12 @@
             <button class="back-button" @click="backToMeals"><i class="fas fa-chevron-left"></i></button>
 	    <p v-if="!meal.name">Meal</p>
 	    <p v-else>{{meal.name}}</p>
-            <button @click="createMeal" class="ui-bar-button" :class="{ 'disabled': meal.name === '' || !meal.name }">Done</button>
+            <button @click="createMeal" class="ui-bar-button" :class="{ 'disabled': meal.name === '' || !meal.name }">
+		    <span v-if="id">Done</span>
+		    <span v-else>Create</span>
+	    </button>
         </div>
-        <div class="addmeal">
+        <div class="meal__name">
             <label class="label space-x" for="">Name</label>
             <div class="input-container u-mt js-input-container" :class="toggleInputError">
 		    <input class="input" v-model="meal.name" placeholder="Required" type="text">
@@ -111,7 +114,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-    .addmeal {
-        margin-top: 25px;
-    }
+
+	// Import meal view styles.
+	@import '../styles/views/meals';
+
 </style>

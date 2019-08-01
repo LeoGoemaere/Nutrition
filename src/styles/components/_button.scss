@@ -1,0 +1,76 @@
+.button-container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.button {
+	border: none;
+	width: 100%;
+	padding: 10px;
+	border-radius: 5px;
+	background-color: #3ae374;
+	color: #fff;
+	font-size: 17px;
+	transition: background-color .4s ease-out;
+	&:focus {
+		outline: none;
+	}
+}
+
+.button--alert {
+	background-color: #ec5555;
+	transition: background-color .4s ease-out;
+}
+
+.back-button {
+	border: none;
+	background: none;
+	color: #3ae374;
+	font-size: 25px;
+	margin: 10px 0;
+}
+
+.add-button {
+	border: none;
+	background: none; 
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	font-size: 15px;
+	font-weight: 700;
+	background-color: #3ae374;
+	border-radius: 50%;
+	color: #fff;
+	text-decoration: none;
+	text-align: center;
+}
+
+.close-button {
+	color: #fff;
+	border: none;
+	position: fixed;
+	top: 20px;
+	right: 20px;
+	width: 30px;
+	height: 30px;
+	font-size: 16px;
+	line-height: 16px;
+	background-color: #535c68;
+	border-radius: 50%;
+}
+
+.ui-bar-button {
+	background: none;
+	border: none;
+	text-transform: uppercase;
+	color: #3ae374;
+	align-self: stretch;
+	font-size: 14px;
+	text-decoration: none;
+	display: flex;
+	align-items: center;
+	&.disabled {
+		opacity: .5;
+	}
+}

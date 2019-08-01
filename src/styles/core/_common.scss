@@ -1,0 +1,24 @@
+body {
+	padding-bottom: 50px;
+	font-family: $font-family;
+}
+
+h1 {
+	margin: 15px 0;
+}
+
+.heading {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.push-layer {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: #fff;
+	z-index: 10;
+}

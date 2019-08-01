@@ -1,0 +1,53 @@
+$calorie-color: #f4c368;
+$protein-color: #77e18a;
+$carb-color: #ea87e1;
+$fat-color: #8ec6f8;
+
+.nutriments {
+	margin-bottom: 30px;
+}
+
+.nutriments__dose {
+	font-weight: 700;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.nutriments__row {
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	margin-top: 15px;
+	padding-top: 15px;
+	color: #434343;
+	+ .nutriments__row {
+		border-top: 1px solid grey;
+	}
+}
+
+.food__figure {
+	height: 220px;
+}
+
+.food__image {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.check-button {
+	border: none;
+	background: none;
+	color: #535c68;
+	outline: none;
+	font-size: 18px;
+}
+.check-button--ischecked {
+	color: #3ae374;
+}
+
+.icon--cal { color: $calorie-color; }
+.icon-prot { color: $protein-color; }
+.icon-carb { color: $carb-color; }
+.icon-fat { color: $fat-color; }
