@@ -9,7 +9,7 @@
 				</transition>
 			</button>
 		</div>
-		<div class="tile__row" 
+		<div class="tile" 
 			 v-for="food in filterFavoriteFoods"
 			 :key="food.key"
 			 :class="{ 'active': food.isSelected }"

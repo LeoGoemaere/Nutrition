@@ -43,7 +43,7 @@
 					<div 
 						v-for="food in meal.foods"
 						:key="food.key"
-						class="tile__row"
+						class="tile"
 					>
 						<img class="tile__image" :src="food.datas.image_url" alt="">
 						<div class="tile__name">{{food.datas.product_name}}</div>

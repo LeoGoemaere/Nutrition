@@ -14,8 +14,14 @@
 						</button>
 					</div>
 				</div>
+				<div class="space-x u-mt">
+					<button class="button">
+						<i class="fas fa-plus u-mr"></i>
+						<span>Create food</span>
+					</button>
+				</div>
 				<div v-if="searchResults" class="search__results">
-					<div class="tile__row" 
+					<div class="tile" 
 						v-for="(food, index) in searchResults.products"
 						:key="food.key"
 						:class="{'active': favoriteFoods.some(el => el.datas._id === food._id)}"
@@ -35,12 +41,6 @@
 						</div>
 					</div>
 				</div>
-			</div>
-			<div class="space-x u-mt">
-				<button class="button">
-					<i class="fas fa-plus u-mr"></i>
-					<span>Create food</span>
-				</button>
 			</div>
 		</div>
 	</div>
