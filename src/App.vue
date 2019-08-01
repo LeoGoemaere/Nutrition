@@ -24,6 +24,7 @@
 	// Import core styles.
 	@import './styles/core/reset';
 	@import './styles/core/variables';
+	@import './styles/core/mixins';
 	@import './styles/core/animations';
 	@import './styles/core/common';
 
