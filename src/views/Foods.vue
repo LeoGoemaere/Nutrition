@@ -7,7 +7,7 @@
 				<router-view></router-view>
 			</transition>
 		</div>
-		<FavoriteFoodsList :foods="getFavoriteFoods" />
+		<FavoriteFoodsList :foods="getFavoriteFoods" tileType="grid" />
 	</div>
 </template>
 

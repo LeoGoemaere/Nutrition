@@ -40,17 +40,13 @@
 							<span class="meal__datas">{{ meal.foods.map(food => roundValue(calculNutrimentDatas(food, meal, nutriment.fat)))[0] }}</span>
 						</p>
 					</div>
-					<div 
+					<Tile 
 						v-for="food in meal.foods"
 						:key="food.key"
-						class="tile"
-					>
-						<img class="tile__image" :src="food.datas.image_url" alt="">
-						<div class="tile__name">{{food.datas.product_name}}</div>
-						<div class="tile__quantity">
-							<span class="tile__quantity-copy">{{food.quantity}} g</span>
-						</div>
-					</div>
+						:food="food"
+						:showQuantity="true"
+						type="slim"
+					/>
 				</div>
 			</div>
 		</div>
@@ -60,10 +56,11 @@
 <script>
 import { mapGetters } from 'vuex';
 
+import Tile from '@/components/tile/Tile';
+
 export default {
 	name: 'meals',
-	components: {
-	},
+	components: { Tile },
 	data: function() {
 		return {
 			nutriment: {

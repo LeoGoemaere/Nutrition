@@ -1,0 +1,26 @@
+// Allow to create ellipsis when the row count of the element is bigger than the lineCount set.
+// The $bg is used to hide the ellipses when the entire copy is visible.
+@mixin multiLineEllipsis($lineHeight: 1.2em, $lineCount: 1, $bg: white) {
+	overflow: hidden;
+	position: relative;
+	line-height: $lineHeight;
+	max-height: $lineHeight * $lineCount;
+	height: $lineHeight * $lineCount;
+	padding-right: 1em;
+	overflow-wrap: break-word;
+	word-wrap: break-word;
+	&::before {
+		content: '...';
+		position: absolute;
+		right: 0;
+		bottom: 0;
+	}
+	&::after {
+		content: '';
+		position: absolute;
+		right: 0;
+		width: 1em;
+		height: $lineHeight;
+		background: $bg;
+	}
+}

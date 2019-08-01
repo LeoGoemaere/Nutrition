@@ -9,23 +9,15 @@
 				</transition>
 			</button>
 		</div>
-		<div class="tile" 
-			 v-for="food in filterFavoriteFoods"
-			 :key="food.key"
-			 :class="{ 'active': food.isSelected }"
-			 >
-			<img class="tile__image" :src="food.datas.image_url" alt="">
-			<div class="tile__name">{{food.datas.product_name}}</div>
-			<div class="u-mr u-ml">
-				<button class="tile__button js-checked-btn">
-					<i class="far fa-check-circle"></i>
-				</button>
-			</div>
-			<div v-if="showQuantity" class="tile__quantity">
-				<input type="number" :value="food.quantity" @change="foodQuantityChanged(food, $event)" placeholder="Quantity" class="tile__quantity-input">
-				<span class="tile__quantity-unit">g</span>
-			</div>
-		</div>
+		<Tile 
+			v-for="food in filterFavoriteFoods"
+			:key="food.key"
+			:food="food"
+			:isSelected="food.isSelected"
+			:showQuantity="showQuantity"
+			:editQuantity="editQuantity"
+			:type="tileType"
+		/>
 	</div>
 </template>
 
@@ -33,21 +25,21 @@
 import { mapGetters } from 'vuex';
 import { EventBus } from '@/event-bus';
 
+import Tile from '@/components/tile/Tile';
+
 export default {
 	name: "FavoriteFoodsList",
+	components: { Tile },
 	props: {
 		showQuantity: Boolean,
-		foods: Array
+		editQuantity: Boolean,
+		foods: Array,
+		tileType: String
 	},
 	data: function() {
 		return {
 			filterRequest: null,
-			food: null,
-			favoriteFoods: null
 		}
-	},
-	mounted() {
-		this.favoriteFoods = JSON.parse(JSON.stringify(this.foods));
 	},
 	methods: {
 		convertToLowerCase: function(string) {
@@ -59,12 +51,6 @@ export default {
 		},
 		clearFilterRequest() {
 			this.filterRequest = null;
-		},
-		foodQuantityChanged: function(food, event) {
-			const quantity = parseInt(event.target.value, 10);
-			const isQuantitySet = quantity > 0;
-			this.food = isQuantitySet ? { datas: { ...food.datas }, isSelected: true, quantity } : { datas: { ...food.datas }, isSelected: false, quantity: null };
-			EventBus.$emit('food-row:quantity-changed', this.food);
 		}
 	},
 	computed: {

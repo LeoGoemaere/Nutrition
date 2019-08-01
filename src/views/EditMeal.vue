@@ -16,7 +16,7 @@
 	    </div>
         </div>
         <div class="u-mt">
-            <FavoriteFoodsList :showQuantity="true" :foods="foods" />
+            <FavoriteFoodsList :foods="foods" :editQuantity="true" tileType="grid" />
         </div>
 	</div>
 </template>
