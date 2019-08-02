@@ -9,15 +9,17 @@
 				</transition>
 			</button>
 		</div>
-		<Tile 
-			v-for="food in filterFavoriteFoods"
-			:key="food.key"
-			:food="food"
-			:isSelected="food.isSelected"
-			:showQuantity="showQuantity"
-			:editQuantity="editQuantity"
-			:type="tileType"
-		/>
+		<div>
+			<Tile 
+				v-for="food in filterFavoriteFoods"
+				:key="food.key"
+				:food="food"
+				:isSelected="food.isSelected"
+				:showQuantity="showQuantity"
+				:editQuantity="editQuantity"
+				:type="tileType"
+			/>
+		</div>
 	</div>
 </template>
 

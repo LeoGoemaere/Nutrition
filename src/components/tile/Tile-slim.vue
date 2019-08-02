@@ -1,23 +1,15 @@
 <template>
-	<p v-if="isTypeActive()">Slim</p>
-	<!-- <div class="tile tile--grid" 
-		:class="{ 'active': isSelected }"
-	>
-		<img class="tile__image" :src="food.datas.image_url" alt="">
-		<div class="tile__name">{{food.datas.product_name}}</div>
-		<div class="u-mr u-ml">
-			<button class="tile__button js-checked-btn">
-				<i class="far fa-check-circle"></i>
-			</button>
+	<div v-if="isTypeActive()" class="tile__details">
+		<p class="tile__name">{{food.datas.product_name}}</p>
+		<div v-if="showQuantity" class="tile__quantity">
+			<span class="tile__quantity-copy">{{food.quantity}}</span>
+			<span class="tile__quantity-unit">g</span>
 		</div>
 		<div v-if="editQuantity" class="tile__quantity">
 			<input type="number" :value="food.quantity" @change="foodQuantityChanged" placeholder="Quantity" class="tile__quantity-input">
 			<span class="tile__quantity-unit">g</span>
 		</div>
-		<div v-if="showQuantity" class="tile__quantity">
-			<span class="tile__quantity-copy">{{food.quantity}} g</span>
-		</div>
-	</div> -->
+	</div>
 </template>
 
 <script>
