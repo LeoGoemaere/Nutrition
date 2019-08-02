@@ -1,23 +1,24 @@
 <template>
 	<div class="push-layer">
-        <div class="button-container space-x">
-            <button class="back-button" @click="backToMeals"><i class="fas fa-chevron-left"></i></button>
-	    <p v-if="!meal.name">Meal</p>
-	    <p v-else>{{meal.name}}</p>
-            <button @click="createMeal" class="ui-bar-button" :class="{ 'disabled': meal.name === '' || !meal.name }">
-		    <span v-if="id">Done</span>
-		    <span v-else>Create</span>
-	    </button>
-        </div>
-        <div class="meal__name">
-            <label class="label space-x" for="">Name</label>
-            <div class="input-container u-mt js-input-container" :class="toggleInputError">
-		    <input class="input" v-model="meal.name" placeholder="Required" type="text">
-	    </div>
-        </div>
-        <div class="u-mt">
-            <FavoriteFoodsList :foods="foods" :editQuantity="true" tileType="grid" />
-        </div>
+			<div class="button-container space-x">
+			<button class="back-button" @click="backToMeals"><i class="fas fa-chevron-left"></i></button>
+			<p v-if="!meal.name">Meal</p>
+			<p v-else>{{meal.name}}</p>
+			<button @click="createMeal" class="ui-bar-button" :class="{ 'disabled': meal.name === '' || !meal.name }">
+				<span v-if="id">Done</span>
+				<span v-else>Create</span>
+			</button>
+		</div>
+			<div class="meal__name">
+			<label class="label space-x" for="">Name</label>
+			<div class="input-container u-mt js-input-container" :class="toggleInputError">
+				<input class="input" v-model="meal.name" placeholder="Required" type="text">
+			</div>
+		</div>
+		<div class="u-mt">
+			<FavoriteFoodsList v-if="foods.length > 0" :foods="foods" :editQuantity="true" tileType="grid" />
+			<EmptyView v-else view="foods" />
+		</div>
 	</div>
 </template>
 
@@ -27,10 +28,11 @@ import { EventBus } from '@/event-bus';
 import uuid from 'uuid/v4';
 
 import FavoriteFoodsList from '@/components/FavoriteFoodsList';
+import EmptyView from '@/components/EmptyView';
 
 export default {
     name: "AddMeal",
-    components: { FavoriteFoodsList },
+    components: { FavoriteFoodsList, EmptyView },
 	props: {
 		id: String
 	},
@@ -42,7 +44,7 @@ export default {
 				name: null,
 				foods: []
 			},
-			foods: null
+			foods: []
 		}
 	},
 	mounted() {

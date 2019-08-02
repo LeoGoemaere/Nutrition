@@ -7,7 +7,7 @@
 				<router-view></router-view>
 			</transition>
 		</div>
-		<div class="meal__list">
+		<div v-if="getMeals.length > 0" class="meal__list">
 			<div
 				v-for="meal in getMeals"
 				:key="meal.key"
@@ -50,6 +50,7 @@
 				</div>
 			</div>
 		</div>
+		<EmptyView v-else view="meals" />
 	</div>
 </template>
 
@@ -57,10 +58,11 @@
 import { mapGetters } from 'vuex';
 
 import Tile from '@/components/tile/Tile';
+import EmptyView from '@/components/EmptyView';
 
 export default {
 	name: 'meals',
-	components: { Tile },
+	components: { Tile, EmptyView },
 	data: function() {
 		return {
 			nutriment: {

@@ -1,6 +1,6 @@
 <template>
-	<div class="space-x">
-		<div v-if="getFavoriteFoods.length > 0" class="filter">
+	<div>
+		<div v-if="getFavoriteFoods.length > 0" class="filter space-x">
 			<input class="filter__input" v-model="filterRequest" type="text" placeholder="Search...">
 			<button class="filter__button" @click="filterRequest ? clearFilterRequest() : null" :class="{ 'search__button--inactive': !filterRequest, 'search__button--red': filterRequest }">
 				<transition name="fade-out-in" mode="out-in">
@@ -9,7 +9,7 @@
 				</transition>
 			</button>
 		</div>
-		<div>
+		<div class="space-x">
 			<Tile 
 				v-for="food in filterFavoriteFoods"
 				:key="food.key"

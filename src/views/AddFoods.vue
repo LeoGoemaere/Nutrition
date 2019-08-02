@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div class="push-layer">
-			<div class="button-container space-x">
+			<div class="button-container space-x u-sticky-top">
 				<button class="back-button" @click="backToFavorite"><i class="fas fa-chevron-left"></i></button>
 				<button @click="addToFavoriteFoods" class="ui-bar-button" :class="{ 'disabled': !isFoodsSelected }">Done</button>
 			</div>
