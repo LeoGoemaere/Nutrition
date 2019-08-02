@@ -46,6 +46,7 @@
 						:food="food"
 						:showQuantity="true"
 						type="slim"
+						view="meals"
 					/>
 				</div>
 			</div>

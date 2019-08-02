@@ -1,5 +1,5 @@
 <template>
-	<div v-if="isTypeActive()" class="tile__details">
+	<div v-if="isTypeActive()" @click="goToFoodDetail" class="tile__details">
 		<p class="tile__name">{{food.datas.product_name}}</p>
 		<div v-if="showQuantity" class="tile__quantity">
 			<span class="tile__quantity-copy">{{food.quantity}}</span>
@@ -23,7 +23,8 @@ export default {
 		isSelected: Boolean,
 		showQuantity: Boolean,
 		editQuantity: Boolean,
-		tileType: String
+		tileType: String,
+		view: String // Define wich view is displaying the component in order to go back to the view after visiting the food details.
 	},
 	data: function() {
 		return {
@@ -31,6 +32,10 @@ export default {
 		}
 	},
 	methods: {
+		goToFoodDetail: function() {
+			if (!this.view) return;
+			this.$router.push({ name: 'details', params: { id: this.food.datas._id, view: this.view } });
+		},
 		foodQuantityChanged: function(event) {
 			const quantity = parseInt(event.target.value, 10);
 			const isQuantitySet = quantity > 0;

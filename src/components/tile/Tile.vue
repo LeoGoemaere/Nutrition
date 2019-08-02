@@ -6,6 +6,7 @@
 			:showQuantity="showQuantity"
 			:editQuantity="editQuantity"
 			:tileType="type"
+			:view="view"
 		/>
 		<TileSlim
 			:food="food"
@@ -13,6 +14,7 @@
 			:showQuantity="showQuantity"
 			:editQuantity="editQuantity"
 			:tileType="type"
+			:view="view"
 		/>
 	</div>
 </template>
@@ -32,7 +34,8 @@ export default {
 		isSelected: Boolean,
 		showQuantity: Boolean,
 		editQuantity: Boolean,
-		type: String
+		type: String,
+		view: String
 	},
 	methods: {
 		foodRowClicked: function(event) {

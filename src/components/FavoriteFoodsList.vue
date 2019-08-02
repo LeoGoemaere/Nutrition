@@ -18,6 +18,7 @@
 				:showQuantity="showQuantity"
 				:editQuantity="editQuantity"
 				:type="tileType"
+				:view="view"
 			/>
 		</div>
 	</div>
@@ -36,7 +37,8 @@ export default {
 		showQuantity: Boolean,
 		editQuantity: Boolean,
 		foods: Array,
-		tileType: String
+		tileType: String,
+		view: String // Define wich view is displaying the component in order to go back to the view after visiting the food details.
 	},
 	data: function() {
 		return {

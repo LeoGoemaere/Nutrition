@@ -7,7 +7,7 @@
 				<router-view></router-view>
 			</transition>
 		</div>
-		<FavoriteFoodsList v-if="getFavoriteFoods.length > 0" :foods="getFavoriteFoods" tileType="grid" />
+		<FavoriteFoodsList v-if="getFavoriteFoods.length > 0" :foods="getFavoriteFoods" tileType="grid" view="foods" />
 		<EmptyView v-else view="foods" />
 	</div>
 </template>

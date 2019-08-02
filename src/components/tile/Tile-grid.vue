@@ -1,6 +1,8 @@
 <template>
-	<div v-if="isTypeActive()">
-		<img class="tile__image" :src="food.datas.image_url" />
+	<div v-if="isTypeActive()" @click="goToFoodDetail">
+		<div>
+			<img class="tile__image" :src="food.datas.image_url" />
+		</div>
 		<div class="tile__details">
 			<p class="tile__name">{{food.datas.product_name}}</p>
 			<div v-if="showQuantity" class="tile__quantity">
@@ -12,20 +14,6 @@
 				<span class="tile__quantity-unit">g</span>
 			</div>
 		</div>
-		<!-- <img class="tile__image" :src="food.datas.image_url" alt="">
-		<div class="tile__name">{{food.datas.product_name}}</div>
-		<div class="u-mr u-ml">
-			<button class="tile__button js-checked-btn">
-				<i class="far fa-check-circle"></i>
-			</button>
-		</div>
-		<div v-if="editQuantity" class="tile__quantity">
-			<input type="number" :value="food.quantity" @change="foodQuantityChanged" placeholder="Quantity" class="tile__quantity-input">
-			<span class="tile__quantity-unit">g</span>
-		</div>
-		<div v-if="showQuantity" class="tile__quantity">
-			<span class="tile__quantity-copy">{{food.quantity}} g</span>
-		</div> -->
 	</div>
 </template>
 
@@ -40,7 +28,8 @@ export default {
 		isSelected: Boolean,
 		showQuantity: Boolean,
 		editQuantity: Boolean,
-		tileType: String
+		tileType: String,
+		view: String // Define wich view is displaying the component in order to go back to the view after visiting the food details.
 	},
 	data: function() {
 		return {
@@ -48,6 +37,10 @@ export default {
 		}
 	},
 	methods: {
+		goToFoodDetail: function() {
+			if (!this.view) return;
+			this.$router.push({ name: 'details', params: { id: this.food.datas._id, view: this.view } });
+		},
 		foodQuantityChanged: function(event) {
 			const quantity = parseInt(event.target.value, 10);
 			const isQuantitySet = quantity > 0;
