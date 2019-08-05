@@ -42,6 +42,7 @@
 	@import './styles/components/form';
 	@import './styles/components/search';
 	@import './styles/components/empty-view';
+	@import './styles/components/segmented-control';
 
 	// Import layouts styles.
 	@import './styles/layouts/navigation';

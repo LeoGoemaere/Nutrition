@@ -1,0 +1,16 @@
+.segmented {
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+	border-bottom: 1px solid#457A9D;
+	padding: 10px 0;
+}
+
+.segmented__item {
+	color: #949398;
+	list-style-type: none;
+	&.active {
+		color: #457A9D;
+		font-weight: 500;
+	}
+}

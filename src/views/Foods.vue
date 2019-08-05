@@ -1,12 +1,12 @@
 <template>
 	<div class="foods">
-		<div class="heading space-x u-sticky-top">
-			<h1>My Foods</h1>
+		<div class="heading space-x u-sticky-top u-mb">
+			<h1>Foods</h1>
 			<router-link to="/foods/add" class="add-button">+</router-link>
-			<transition name="sliding-on-top">
-				<router-view></router-view>
-			</transition>
 		</div>
+		<transition name="sliding-on-top">
+			<router-view></router-view>
+		</transition>
 		<FavoriteFoodsList v-if="getFavoriteFoods.length > 0" :foods="getFavoriteFoods" tileType="grid" view="foods" />
 		<EmptyView v-else view="foods" />
 	</div>

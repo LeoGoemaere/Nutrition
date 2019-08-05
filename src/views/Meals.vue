@@ -1,12 +1,12 @@
 <template>
 	<div class="meals">
 		<div class="heading space-x">
-			<h1>My Meals</h1>
+			<h1>Meals</h1>
 			<router-link to="/meals/add" class="add-button">+</router-link>
-			<transition name="sliding-on-top">
-				<router-view></router-view>
-			</transition>
 		</div>
+		<transition name="sliding-on-top">
+			<router-view></router-view>
+		</transition>
 		<div v-if="getMeals.length > 0" class="meal__list">
 			<div
 				v-for="meal in getMeals"
@@ -16,7 +16,7 @@
 				<div @click="toggleAccordion($event)" class="meal__title">
 					<p>{{meal.name}}</p>
 					<div class="meal__edit-container">
-						<router-link :to="{ name: 'edit', params: { id: meal.id } }" class="ui-bar-button js-ui-bar-button u-mr">Edit</router-link>
+						<router-link :to="{ name: 'edit', params: { id: meal.id } }" class="ui-bar-button ui-bar-button--edit js-ui-bar-button u-mr">Edit</router-link>
 						<i class="fas fa-chevron-down icon-chevron"></i>
 					</div>
 				</div>

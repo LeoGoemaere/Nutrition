@@ -1,6 +1,7 @@
 body {
 	padding-bottom: 50px;
 	font-family: $font-family;
+	color: #8f8e94;
 }
 
 h1 {
@@ -11,6 +12,8 @@ h1 {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	background-color: #457A9D;
+	color: #fff;
 }
 
 .push-layer {

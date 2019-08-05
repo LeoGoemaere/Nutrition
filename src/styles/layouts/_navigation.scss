@@ -7,13 +7,13 @@
 	justify-content: space-around;
 	align-items: center;
 	height: 50px;
-	background-color: #535c68;
+	background-color: #457A9D;
 	z-index: 100;
 }
 
 .nav__link {
 	color: #fff;
 	&.router-link-active {
-		color: #3ae374;
+		color: #FFCAB1;
 	}
 }
