@@ -6,10 +6,11 @@
 	display: flex;
 	justify-content: space-evenly;
 	padding: 10px 0;
-	background-color: #dedede;
-	color: #a9a9a9;
+	color: #68b683;
 	border-radius: 3px;
 	font-size: 13px;
+	box-shadow: 0px 1px 3px 0px #c5c5c5;
+	border-radius: 10px;
 }
 
 .meal__recap-icon {
@@ -18,7 +19,7 @@
 
 .meal__row {
 	+.meal__row {
-		border-top: 1px solid #d7d7d7;
+		border-top: 1px solid #f5f5f5;
 	}
 }
 .meal__row--active {
