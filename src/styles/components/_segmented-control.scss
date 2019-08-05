@@ -7,9 +7,14 @@
 }
 
 .segmented__item {
+	list-style-type: none;
+}
+
+.segmented__link {
 	color: #949398;
 	list-style-type: none;
-	&.active {
+	text-decoration: none;
+	&.router-link-active{
 		color: #457A9D;
 		font-weight: 500;
 	}

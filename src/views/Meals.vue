@@ -1,6 +1,6 @@
 <template>
 	<div class="meals">
-		<div class="heading space-x">
+		<div class="heading heading--fill space-x">
 			<h1>Meals</h1>
 			<router-link to="/meals/add" class="add-button">+</router-link>
 		</div>
@@ -11,16 +11,16 @@
 			<div
 				v-for="meal in getMeals"
 				:key="meal.key"
-				class="meal__row js-meal-row space-x"
+				class="accordion__row js-accordion-row space-x"
 			>
-				<div @click="toggleAccordion($event)" class="meal__title">
+				<div @click="toggleAccordion($event)" class="accordion__title">
 					<p>{{meal.name}}</p>
-					<div class="meal__edit-container">
+					<div class="accordion__edit-container">
 						<router-link :to="{ name: 'edit', params: { id: meal.id } }" class="ui-bar-button ui-bar-button--edit js-ui-bar-button u-mr">Edit</router-link>
 						<i class="fas fa-chevron-down icon-chevron"></i>
 					</div>
 				</div>
-				<div class="meal__details">
+				<div class="accordion__details">
 					<div class="meal__recap">
 						<p>
 							<i class="fas fa-fire-alt meal__recap-icon"></i>
@@ -83,7 +83,7 @@ export default {
 		},
 		toggleAccordion: function(e) {
 			if (e.target.classList.contains('js-ui-bar-button')) return;
-			e.currentTarget.closest('.js-meal-row').classList.toggle('meal__row--active');
+			e.currentTarget.closest('.js-accordion-row').classList.toggle('accordion__row--active');
 		},
 		calculNutrimentDatas: function(food, meal, nutriment) {
 			const nutrimentsQuantity = meal.foods.map(food => food.datas.nutriments[nutriment]).reduce((accumulator, currentValue) => parseFloat(accumulator, 10) + parseFloat(currentValue, 10), 0);

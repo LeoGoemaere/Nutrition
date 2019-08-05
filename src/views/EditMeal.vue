@@ -1,6 +1,6 @@
 <template>
 	<div class="push-layer">
-			<div class="button-container space-x u-sticky-top">
+		<div class="button-container space-x u-sticky-top">
 			<button class="back-button" @click="backToMeals"><i class="fas fa-chevron-left"></i></button>
 			<p v-if="!meal.name">Meal</p>
 			<p v-else>{{meal.name}}</p>
@@ -9,7 +9,7 @@
 				<span v-else>Create</span>
 			</button>
 		</div>
-			<div class="meal__name">
+		<div class="meal__name">
 			<label class="label space-x" for="">Name</label>
 			<div class="input-container u-mt js-input-container" :class="toggleInputError">
 				<input class="input" v-model="meal.name" placeholder="Required" type="text">
