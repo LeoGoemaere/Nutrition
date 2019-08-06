@@ -1,8 +1,8 @@
 <template>
 	<div class="foods">
-		<div class="heading heading--fill space-x u-sticky-top u-mb">
+		<div class="heading space-x u-sticky-top u-mb">
 			<h1>Foods</h1>
-			<router-link to="/foods/add" class="add-button">+</router-link>
+			<router-link to="/foods/add" class="add-button add-button--fill">+</router-link>
 		</div>
 		<transition name="sliding-on-top">
 			<router-view></router-view>

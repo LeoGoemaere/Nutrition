@@ -1,6 +1,6 @@
 <template>
 	<div class="profile">
-		<div class="heading heading--fill space-x">
+		<div class="heading space-x">
 			<h1>Daily</h1>
 		</div>
 		<ul class="segmented">

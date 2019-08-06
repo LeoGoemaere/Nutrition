@@ -1,8 +1,8 @@
 <template>
 	<div class="meals">
-		<div class="heading heading--fill space-x">
+		<div class="heading space-x">
 			<h1>Meals</h1>
-			<router-link to="/meals/add" class="add-button">+</router-link>
+			<router-link to="/meals/add" class="add-button add-button--fill">+</router-link>
 		</div>
 		<transition name="sliding-on-top">
 			<router-view></router-view>
@@ -16,7 +16,7 @@
 				<div @click="toggleAccordion($event)" class="accordion__title">
 					<p>{{meal.name}}</p>
 					<div class="accordion__edit-container">
-						<router-link :to="{ name: 'edit', params: { id: meal.id } }" class="ui-bar-button ui-bar-button--edit js-ui-bar-button u-mr">Edit</router-link>
+						<router-link :to="{ name: 'edit', params: { id: meal.id } }" class="ui-bar-button js-ui-bar-button u-mr">Edit</router-link>
 						<i class="fas fa-chevron-down icon-chevron"></i>
 					</div>
 				</div>

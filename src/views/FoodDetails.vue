@@ -5,7 +5,7 @@
 			<figure class="food__figure">
 				<img class="food__image" :src="this.product.image_url" alt="">
 			</figure>
-			<div class="heading heading--fill space-x u-mb">
+			<div class="heading space-x u-mb">
 				<h1>{{this.product.product_name}}</h1>
 			</div>
 			<div class="nutriments">

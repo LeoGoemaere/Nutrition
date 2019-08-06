@@ -2,8 +2,6 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	color: #fff;
-	background-color: #457A9D;
 }
 
 .button {
@@ -23,7 +21,7 @@
 .back-button {
 	border: none;
 	background: none;
-	color: #fff;
+	color: #457A9D;
 	font-size: 25px;
 	margin: 10px 0;
 }
@@ -65,15 +63,12 @@
 	background: none;
 	border: none;
 	text-transform: uppercase;
-	color: #fff;
+	color: #457A9D;
 	align-self: stretch;
 	font-size: 14px;
 	text-decoration: none;
 	display: flex;
 	align-items: center;
-	&.ui-bar-button--edit {
-		color: #A8DADC;
-	}
 	&.disabled {
 		opacity: .5;
 	}

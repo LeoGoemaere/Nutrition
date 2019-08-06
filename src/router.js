@@ -6,7 +6,7 @@ Vue.use(Router)
 export default new Router({
 	routes: [
 		{
-			path: '/daily',
+			path: '/',
 			name: 'daily',
 			// route level code-splitting
 			// this generates a separate chunk (about.[hash].js) for this route

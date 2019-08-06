@@ -7,7 +7,7 @@
 			<router-link class="nav__link" to="/meals">
 				<i class="fas fa-utensils"></i>
 			</router-link>
-			<router-link class="nav__link" to="/daily">
+			<router-link class="nav__link" to="/">
 				<i class="fas fa-calendar"></i>
 			</router-link>
 		</div>
