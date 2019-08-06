@@ -1,23 +1,26 @@
 .segmented {
 	display: flex;
-	align-items: center;
-	justify-content: space-evenly;
-	border-bottom: 1px solid#457A9D;
-	border-top: 1px solid#457A9D;
-	padding: 10px 0;
-	margin-top: 30px;
+	border: 1px solid#457A9D;
+	margin: 30px 10px 0;
+	border-radius: 20.5px;
+	overflow: hidden;
 }
 
 .segmented__item {
 	list-style-type: none;
+	flex: 1;
 }
 
 .segmented__link {
+	padding: 6px 0;
+	text-align: center;
+	display: block;
 	color: #949398;
 	list-style-type: none;
 	text-decoration: none;
 	&.router-link-active{
-		color: #457A9D;
+		background-color: #457A9D;
+		color: #fff;
 		font-weight: 500;
 	}
 }

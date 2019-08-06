@@ -5,7 +5,7 @@
 		</div>
 		<ul class="segmented">
 			<li class="segmented__item">
-				Statistics
+				<a href="" class="segmented__link">Statistics</a>
 				<!-- <router-link class="segmented__link">Stats</router-link> -->
 			</li>
 			<li class="segmented__item">
