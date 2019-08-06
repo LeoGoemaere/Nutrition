@@ -7,8 +7,8 @@
 			</button>
 		</div>
 		<p class="u-mt u-mb u-ta-c">What have you eat today ?</p>
-		<div @click="toggleAccordion($event)" class="accordion__row js-accordion-row space-x">
-			<div class="accordion__title">
+		<div class="accordion__row js-accordion-row space-x">
+			<div @click="toggleAccordion($event)" class="accordion__title">
 				<p>Meals</p>
 				<div class="accordion__edit-container">
 					<i class="fas fa-chevron-down icon-chevron"></i>
@@ -62,7 +62,7 @@ export default {
 	},
 	methods: {
 		backToOverview: function() {
-			this.$router.push({ path: '/overview' });
+			this.$router.push({ path: '/daily/overview' });
 		},
 		toggleAccordion: function(e) {
 			if (e.target.classList.contains('js-ui-bar-button')) return;
