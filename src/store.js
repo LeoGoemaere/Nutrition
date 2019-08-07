@@ -5,6 +5,10 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
 	state: {
+		daily: {
+			meals: [],
+			foods: []
+		},
 		favoriteFoods: [],
 		meals: []
 	},
@@ -15,6 +19,9 @@ export default new Vuex.Store({
 		updateMeals(state, meals) {
 			state.meals = meals;
 		},
+		updateDaily(state, daily) {
+			state.daily = daily;
+		}
 	},
 	getters: {
 		getFavoriteFoods: (state) => {
@@ -22,6 +29,9 @@ export default new Vuex.Store({
 		},
 		getMeals: (state) => {
 			return state.meals;
+		},
+		getDaily: (state) => {
+			return state.daily;
 		}
 	},
 	actions: {

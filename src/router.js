@@ -7,7 +7,7 @@ export default new Router({
 	routes: [
 		{
 			path: '/',
-			redirect: { name: 'daily' }
+			redirect: { name: 'overview' }
 		},
 		{
 			path: '/daily',

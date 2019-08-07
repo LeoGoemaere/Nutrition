@@ -42,7 +42,9 @@ export default {
 			meal: {
 				id: null,
 				name: null,
-				foods: []
+				foods: [],
+				serving: 0,
+				isInDaily: false
 			},
 			foods: []
 		}
