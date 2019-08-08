@@ -7,7 +7,7 @@
 			<router-link class="nav__link" to="/meals">
 				<i class="fas fa-utensils"></i>
 			</router-link>
-			<router-link class="nav__link" to="/daily/overview">
+			<router-link class="nav__link" to="/daily">
 				<i class="fas fa-calendar"></i>
 			</router-link>
 		</div>
@@ -44,6 +44,7 @@
 	@import './styles/components/empty-view';
 	@import './styles/components/segmented-control';
 	@import './styles/components/accordion';
+	@import './styles/components/table';
 
 	// Import layouts styles.
 	@import './styles/layouts/navigation';

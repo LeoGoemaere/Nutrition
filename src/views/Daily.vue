@@ -5,8 +5,7 @@
 		</div>
 		<ul class="segmented">
 			<li class="segmented__item">
-				<a href="" class="segmented__link">Statistics</a>
-				<!-- <router-link class="segmented__link">Stats</router-link> -->
+				<router-link :to="{ name: 'statistics' }" class="segmented__link">Statistics</router-link>
 			</li>
 			<li class="segmented__item">
 				<router-link :to="{ name: 'overview' }" class="segmented__link">Overview</router-link>
