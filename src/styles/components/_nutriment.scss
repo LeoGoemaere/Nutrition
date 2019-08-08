@@ -1,0 +1,53 @@
+.nutriment__label {
+	display: flex;
+	align-items: center;
+	&:before {
+		content: "";
+		border-radius: 50%;
+		margin-right: 5px;
+		width: 6px;
+		height: 6px;
+	}
+}
+
+.nutriment__calories-row {
+	background-color: #c1c1c1;
+	color: #fff;
+}
+
+
+.nutriment__value {
+	font-weight: 500;
+}
+
+
+// Proteins.
+.nutriment__label--prots {
+	&:before {
+		background-color: #A9E5BB;
+	}
+}
+.nutriment__prots-row {
+	color: #A9E5BB;
+}
+
+
+// Carbs.
+.nutriment__label--carbs {
+	&:before {
+		background-color: #FCAA67;
+	}
+}
+.nutriment__carbs-row {
+	color: #FCAA67;
+}
+
+// Fats.
+.nutriment__label--fats {
+	&:before {
+		background-color: #A09ABC;
+	}
+}
+.nutriment__fats-row {
+	color: #A09ABC;
+}

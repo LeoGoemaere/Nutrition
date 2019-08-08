@@ -45,6 +45,8 @@
 	@import './styles/components/segmented-control';
 	@import './styles/components/accordion';
 	@import './styles/components/table';
+	@import './styles/components/chart';
+	@import './styles/components/nutriment';
 
 	// Import layouts styles.
 	@import './styles/layouts/navigation';
