@@ -43,8 +43,6 @@ export default {
 				id: null,
 				name: null,
 				foods: [],
-				serving: 0,
-				isInDaily: false
 			},
 			foods: []
 		}
@@ -77,7 +75,7 @@ export default {
 			this.foods.find(el => el.datas._id === food.datas._id).quantity = food.quantity;
 		},
 		selectedFoodsForMeal() {
-			const foodsSelected = this.foods.filter(food => food.isSelected);
+			const foodsSelected = this.foods.filter(food => food.quantity > 0);
 			this.meal.foods = [...foodsSelected];
 		},
 		createMeal() {

@@ -39,7 +39,7 @@ export default {
 		foodQuantityChanged: function(event) {
 			const quantity = parseInt(event.target.value, 10);
 			const isQuantitySet = quantity > 0;
-			const foodUpdated = isQuantitySet ? { datas: { ...this.food.datas }, isSelected: true, quantity, isInDaily: this.food.isInDaily } : { datas: { ...this.food.datas }, isSelected: false, quantity: null, isInDaily: this.food.isInDaily };
+			const foodUpdated = isQuantitySet ? { datas: { ...this.food.datas }, isSelected: true, quantity } : { datas: { ...this.food.datas }, isSelected: false, quantity: null };
 			EventBus.$emit('food-row:quantity-changed', foodUpdated);
 		},
 		isTypeActive() {

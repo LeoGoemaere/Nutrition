@@ -101,14 +101,12 @@ export default {
 		selectedFoodsForDaily: function(food) {
 			this.foods.find(el => el.datas._id === food.datas._id).isSelected = food.isSelected;
 			this.foods.find(el => el.datas._id === food.datas._id).quantity = food.quantity;
-			this.foods.find(el => el.datas._id === food.datas._id).isInDaily = food.isSelected;
 		},
 		updateSelectedFoods(food) {
 			const isFoodExistFavorite = this.foods.some(el => el.datas._id === food.datas._id);
 			if (isFoodExistFavorite) {
 				this.foods.find(el => el.datas._id === food.datas._id).quantity = food.quantity;
 				this.foods.find(el => el.datas._id === food.datas._id).isSelected = food.isSelected;
-				this.foods.find(el => el.datas._id === food.datas._id).isInDaily = food.isInDaily;
 			} else {
 				this.daily.foods = this.daily.foods.filter(el => el.datas._id !== food.datas._id);
 			}

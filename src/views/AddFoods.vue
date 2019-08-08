@@ -76,7 +76,7 @@ export default {
 				.then((response) => {  return response.json(); })
 				.then(data => {
 					this.searchResults = data.products.map(element => { 
-						return	{ datas: element, isSelected: false,  quantity: null, isInDaily: false }
+						return	{ datas: element, isSelected: false,  quantity: null }
 					})
 				})
 
@@ -86,7 +86,7 @@ export default {
 			if (isFoodSelected) {
 				this.favoriteFoods = this.favoriteFoods.filter(el => el.datas._id !== food.datas._id);
 			} else {
-				this.favoriteFoods.push({ datas: food.datas, isSelected: false,  quantity: null, isInDaily: false });
+				this.favoriteFoods.push({ datas: food.datas, isSelected: false,  quantity: null });
 			}
 			const isFavoriteFoodsdifferentFromstore = this.getFavoriteFoods.length !== this.favoriteFoods.length;
 			const isFavoriteFoodsContainsEveryItemFromStore = this.getFavoriteFoods.map(el => el.datas._id).every(id => this.favoriteFoods.map(el => el.datas._id).includes(id));
