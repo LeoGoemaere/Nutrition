@@ -17,12 +17,12 @@
 			<div class="accordion__details" v-if="getMeals.length > 0">
 
 				<TileMeal
-					v-for="meal in meals"
+					v-for="meal in getMeals"
 					:key="meal.key"
 					:meal="meal"
 					:editQuantity="true"
-					:serving="meal.serving"
-					:isSelected="meal.serving > 0"
+					:serving="calculServing(meal)"
+					:isSelected="calculServing(meal) > 0"
 				/>
 			</div>
 			<div v-else class="accordion__details">
@@ -66,7 +66,6 @@ export default {
 				foods: [],
 				meals: []
 			},
-			meals: null,
 			foods: null
 		}
 	},
@@ -74,9 +73,8 @@ export default {
 		EventBus.$on('tile-meal:serving-changed', this.servingMealChangedHandler);
 		EventBus.$on('food-row:quantity-changed', this.foodRowQuantityChangedHandler);
 		this.daily = JSON.parse(JSON.stringify(this.getDaily));
-		this.meals = JSON.parse(JSON.stringify(this.getMeals));
 		this.foods = JSON.parse(JSON.stringify(this.getFavoriteFoods));
-		this.daily.meals.forEach(meal => this.updateSelectedMeals(meal));
+		// this.daily.meals.forEach(meal => this.updateSelectedMeals(meal));
 		this.daily.foods.forEach(food => this.updateSelectedFoods(food));
 	},
 	destroyed() {
@@ -84,6 +82,9 @@ export default {
 		EventBus.$off('food-row:quantity-changed', this.foodRowQuantityChangedHandler);
 	},
 	methods: {
+		calculServing(meal) {
+			return this.daily.meals.filter(el => el.id === meal.id).length
+		},
 		foodRowQuantityChangedHandler: function(food) {
 			this.selectedFoodsForDaily(food);
 		},
@@ -91,17 +92,16 @@ export default {
 			this.selectedMealsForDaily(data);
 		},
 		selectedMealsForDaily: function(data) {
-			this.meals.find(meal => meal.id === data.meal.id).serving = data.serving;
-			this.meals.find(meal => meal.id === data.meal.id).isInDaily = data.serving > 0;
+			if (data.isServing) {
+				this.daily.meals.push(data.meal);
+			} else {
+				this.daily.meals.shift();
+			}
 		},
 		selectedFoodsForDaily: function(food) {
 			this.foods.find(el => el.datas._id === food.datas._id).isSelected = food.isSelected;
 			this.foods.find(el => el.datas._id === food.datas._id).quantity = food.quantity;
 			this.foods.find(el => el.datas._id === food.datas._id).isInDaily = food.isSelected;
-		},
-		updateSelectedMeals(meal) {
-			this.meals.find(el => el.id === meal.id).serving = meal.serving;
-			this.meals.find(el => el.id === meal.id).isInDaily = meal.isInDaily;
 		},
 		updateSelectedFoods(food) {
 			const isFoodExistFavorite = this.foods.some(el => el.datas._id === food.datas._id);
@@ -115,7 +115,6 @@ export default {
 		},
 		addToDaily: function() {
 			this.daily.foods = this.foods.filter(food => food.isSelected);
-			this.daily.meals = this.meals.filter(meal => meal.serving > 0);
 			this.$store.commit('updateDaily', this.daily);
 			this.$router.push({ path: '/daily/overview' });
 		},

@@ -33,19 +33,15 @@ export default {
 	},
 	methods: {
 		addServing: function() {
-			const serving = this.serving + 1;
-			this.servingChanged(serving);
+			const isServing = true;
+			this.servingChanged(isServing);
 		},
 		removeServing: function() {
-			const serving = this.serving === 0 ? 0 : this.serving - 1;
-			this.servingChanged(serving);
+			const isServing = false;
+			this.servingChanged(isServing);
 		},
-		servingChanged: function(serving) {
-			const data = { meal: this.meal, serving };
-			// const mealUpdated = { foods: [...this.meal.foods],  id: this.meal.id, name: this.meal.name, serving: this.serving };
-			// const quantity = parseInt(event.target.value, 10);
-			// const isQuantitySet = quantity > 0;
-			// const foodUpdated = isQuantitySet ? { datas: { ...this.food.datas }, isSelected: true, quantity } : { datas: { ...this.food.datas }, isSelected: false, quantity: null };
+		servingChanged: function(isServing) {
+			const data = { meal: this.meal, isServing };
 			EventBus.$emit('tile-meal:serving-changed', data);
 		}
 	}

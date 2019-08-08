@@ -4,19 +4,19 @@
 			<span>What have you eat today ?</span>
 			<router-link :to="{ name: 'addOverview' }" class="add-button add-button--fill">+</router-link>
 		</p>
-		<div v-if="filteredOnDailyMeals.length > 0" class="space-x u-mt">
+		<div v-if="getDaily.meals.length > 0" class="space-x u-mt">
 			<p class="label">Meals</p>
 			<TileMeal
-				v-for="meal in filteredOnDailyMeals"
+				v-for="meal in arrOfReduceMeals"
 				:key="meal.key"
 				:meal="meal"
-				:serving="meal.serving"
+				:serving="calculServing(meal)"
 			/>
 		</div>
-		<div v-if="filteredOnDailyFoods.length > 0" class="space-x u-mt">
+		<div v-if="getDaily.foods.length > 0" class="space-x u-mt">
 			<p class="label">Foods</p>
 			<Tile 
-				v-for="food in filteredOnDailyFoods"
+				v-for="food in getDaily.foods"
 				:key="food.key"
 				:food="food"
 				:showQuantity="true"
@@ -40,35 +40,24 @@ export default {
 	components: { Tile, TileMeal },
 	props: {
 	},
-	data: function() {
-		return {
-			daily: null
-		}
-	},
-	mounted() {
-		this.daily = JSON.parse(JSON.stringify(this.getDaily));
-		this.getDaily.meals.forEach(meal => this.updateSelectedMeals(meal));
-		this.getDaily.foods.forEach(food => this.updateSelectedFoods(food));
-	},
 	methods: {
+		calculServing(meal) {
+			return this.getDaily.meals.filter(el => el.id === meal.id).length;
+		},
 		updateSelectedMeals(meal) {
 			const mealName = this.getMeals.find(el => el.id === meal.id).name;
 			meal.name = mealName;
-		},
-		updateSelectedFoods(food) {
-			const isFoodExistFavorite = this.getFavoriteFoods.some(el => el.datas._id === food.datas._id);
-			if (!isFoodExistFavorite) {
-				this.daily.foods = this.daily.foods.filter(el => el.datas._id !== food.datas._id);
-				this.$store.commit('updateDaily', this.daily);
-			}
-		},
+		}
 	},
 	computed: {
-		filteredOnDailyMeals() {
-			return this.getDaily.meals.filter(meal => meal.isInDaily);
-		},
-		filteredOnDailyFoods() {
-			return this.getDaily.foods.filter(food => food.isInDaily);
+		arrOfReduceMeals() {
+			return this.getDaily.meals.reduce((accumulator, currentValue) => {
+				const isCurrentValueExistInAccumulator = accumulator.some(el => el.id === currentValue.id);
+				if (!isCurrentValueExistInAccumulator) {
+					accumulator.push(currentValue);
+				}
+				return accumulator;
+			}, [])
 		},
 		...mapGetters([
 			'getMeals',
