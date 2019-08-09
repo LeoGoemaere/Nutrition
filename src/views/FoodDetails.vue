@@ -8,48 +8,56 @@
 			<div class="heading space-x u-mb">
 				<h1>{{this.product.product_name}}</h1>
 			</div>
-			<div class="nutriments">
-				<div class="space-x nutriments__dose">
-					<p>Informations for 100g</p>
-					<button @click="getFavoriteFoods.some(el => el.id === product.id) ? removeFromFavoriteFoods() : addToFavoritesFoods()" class="check-button" :class="{ 'check-button--ischecked': getFavoriteFoods.some(el => el.id === product.id) }">
-						<transition name="fade-out-in" mode="out-in">
-							<span key="remove" v-if="getFavoriteFoods.some(el => el.id === product.id)">
-								<i class="fas fa-check"></i>
-							</span>
-							<span key="add" v-else>
-								<i class="fas fa-plus"></i>
-							</span>
-						</transition>
+			<div class="u-mb space-x">
+				<button @click="getFavoriteFoods.some(el => el.datas._id === product._id) ? removeFromFavoriteFoods() : addToFavoritesFoods()" class="button food-details__button">
+					<transition name="fade-out-in" mode="out-in">
+						<span key="remove" v-if="getFavoriteFoods.some(el => el.datas._id === product._id)">
+							<i class="fas fa-check u-mr"></i>
+							<span>Added to your favorites</span>
+						</span>
+						<span key="add" v-else>
+							<i class="fas fa-plus u-mr"></i>
+							<span>Add to your favorite</span>
+						</span>
+					</transition>
 				</button>
-				</div>
-				<div class="u-mt space-x nutriments__row">
-					<p>
-						<i class="fas fa-fire-alt icon--cal u-mr"></i>
-						<span>Calories</span>
-					</p>
-					<span class="nutriments__datas">{{product.nutriments.energy_100g}} kj / {{roundValue(convertKilojouleToKilocalorie(product.nutriments.energy_100g))}} kcal</span>
-				</div>
-				<div class="space-x nutriments__row">
-					<p>
-						<i class="fas fa-drumstick-bite icon-prot u-mr"></i>
-						<span>Proteïnes</span>
-					</p>
-					<span class="nutriment__datas">{{product.nutriments.proteins_100g}}g</span>
-				</div>
-				<div class="space-x nutriments__row">
-					<p>
-						<i class="fas fa-bread-slice icon-carb u-mr"></i>
-						<span>Glucides</span>
-					</p>
-					<span class="nutriments__datas">{{product.nutriments.carbohydrates_100g}}g</span>
-				</div>
-				<div class="space-x nutriments__row">
-					<p>
-						<i class="fas fa-fish icon-fat u-mr"></i>
-						<span>Lipides</span>
-					</p>
-					<span class="nutriments__datas">{{product.nutriments.fat_100g}}g</span>
-				</div>
+			</div>
+			<div class="space-x">
+				<table class="table u-mt">
+					<thead class="table__head">
+						<tr>
+							<th class="table__th"></th>
+							<th class="table__th">For 100g</th>
+						</tr>
+					</thead>
+					<tbody class="table__body">
+						<tr class="nutriment__calories-row">
+							<td class="table__td">Energies</td>
+							<td class="u-ta-c table__td">
+								<span>{{product.nutriments.energy_100g}} kj / {{roundValue(convertKilojouleToKilocalorie(product.nutriments.energy_100g))}} kcal</span>
+							</td>
+						</tr>
+						<tr class="nutriment__prots-row">
+							<td class="table__td">Proteins</td>
+							<td class="u-ta-c table__td">
+								<span>{{product.nutriments.proteins_100g}}g</span>
+							</td>
+						</tr>
+						<tr class="nutriment__carbs-row">
+							<td class="table__td">Carbohydrates</td>
+							<td class="u-ta-c table__td">
+								<span>{{product.nutriments.carbohydrates_100g}}g</span>
+							</td>
+						</tr>
+						<tr class="nutriment__fats-row">
+							<td class="table__td">Fats</td>
+							<td class="u-ta-c table__td">
+								<span>{{product.nutriments.fat_100g}}g</span>
+							</td>
+						</tr>
+						
+					</tbody>
+				</table>
 			</div>
 			<div class="space-x">
 				
@@ -99,11 +107,11 @@ export default {
 			return Math.ceil(value * 10) / 10;
 		},
 		addToFavoritesFoods: function() {
-			this.favoriteFoods.push(this.product);
+			this.favoriteFoods.push({ datas: this.product, isSelected: false,  quantity: null });
 			this.$store.commit('updateMyFoods', this.favoriteFoods);
 		},
 		removeFromFavoriteFoods: function() {
-			this.favoriteFoods = this.favoriteFoods.filter(food => food.id !== this.product.id);
+			this.favoriteFoods = this.favoriteFoods.filter(food => food.datas._id !== this.product._id);
 			this.$store.commit('updateMyFoods', this.favoriteFoods);
 		}
 	},
