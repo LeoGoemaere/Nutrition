@@ -117,6 +117,7 @@ export default {
 		},
 		sumQuantityOf(foods, nutriment) {
 			// TODO: Cath the error when the API send a food without nutriments informations.
+			if (foods.length === 0) { return 0 }
 			switch(nutriment.name) {
 				case 'Calories':
 					return foods.map(food => this.calculNutrimentQuantity(food.datas.nutriments.energy_100g, food.quantity)).reduce((accumulator, currentValue) => accumulator + currentValue);
