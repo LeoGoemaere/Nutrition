@@ -25,6 +25,7 @@
 }
 
 .search__input {
+	font-size: 16px;
 	width: 100%;
 	border-radius: 3px;
 	box-sizing: border-box;
@@ -32,7 +33,7 @@
 	display: block;
 	margin: auto;
 	border: none;
-	padding: 15px 20px;
+	padding: 14px 20px;
 	&:focus {
 		outline: none;
 	}

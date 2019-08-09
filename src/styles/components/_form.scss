@@ -33,6 +33,7 @@
 	width: 100%;
 	border: none;
 	box-sizing: border-box;
+	font-size: 16px;
 	.input-container.error & {
 		&::placeholder {
 			color: #FFCAB1;
