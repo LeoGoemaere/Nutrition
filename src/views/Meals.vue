@@ -1,6 +1,6 @@
 <template>
 	<div class="meals">
-		<div class="heading space-x">
+		<div class="heading u-sticky-top space-x">
 			<h1>Meals</h1>
 			<router-link to="/meals/add" class="add-button add-button--fill">+</router-link>
 		</div>
@@ -20,24 +20,20 @@
 						<i class="fas fa-chevron-down icon-chevron"></i>
 					</div>
 				</div>
-				<div class="accordion__details">
+				<div v-if="meal.foods.length > 0" class="accordion__details">
 					<div class="meal__recap">
 						<p>
-							<i class="fas fa-fire-alt meal__recap-icon"></i>
 							<!-- Display the calories by default -->
-							<span class="meal__datas">{{ meal.foods.map(food => roundValue(convertKilojouleToKilocalorie(calculNutrimentDatas(food, meal, nutriment.calories))))[0] }}</span>
+							<span class="meal__datas">{{ meal.foods.map(food => roundValue(convertKilojouleToKilocalorie(calculNutrimentDatas(food, meal, nutriment.calories))))[0] }} kcal</span>
 						</p>
 						<p>
-							<i class="fas fa-drumstick-bite meal__recap-icon"></i>
-							<span class="meal__datas">{{ meal.foods.map(food => roundValue(calculNutrimentDatas(food, meal, nutriment.proteins)))[0] }}</span>
+							<span class="meal__datas meal__datas--prots">{{ meal.foods.map(food => roundValue(calculNutrimentDatas(food, meal, nutriment.proteins)))[0] }}g prots</span>
 						</p>
 						<p>
-							<i class="fas fa-bread-slice meal__recap-icon"></i>
-							<span class="meal__datas">{{ meal.foods.map(food => roundValue(calculNutrimentDatas(food, meal, nutriment.carbs)))[0] }}</span>
+							<span class="meal__datas meal__datas--carbs">{{ meal.foods.map(food => roundValue(calculNutrimentDatas(food, meal, nutriment.carbs)))[0] }} carbs</span>
 						</p>
 						<p>
-							<i class="fas fa-fish meal__recap-icon"></i>
-							<span class="meal__datas">{{ meal.foods.map(food => roundValue(calculNutrimentDatas(food, meal, nutriment.fat)))[0] }}</span>
+							<span class="meal__datas meal__datas--fats">{{ meal.foods.map(food => roundValue(calculNutrimentDatas(food, meal, nutriment.fat)))[0] }} fats</span>
 						</p>
 					</div>
 					<Tile 

@@ -6,7 +6,6 @@
 	display: flex;
 	justify-content: space-evenly;
 	padding: 10px 0;
-	color: #457A9D;
 	border-radius: 3px;
 	font-size: 13px;
 	box-shadow: 0px 1px 3px 0px #c5c5c5;
@@ -20,3 +19,7 @@
 .meal__name {
 	margin-top: 25px;
 }
+
+.meal__datas--prots { color: #A9E5BB }
+.meal__datas--carbs { color: #FCAA67 }
+.meal__datas--fats { color: #A09ABC }
